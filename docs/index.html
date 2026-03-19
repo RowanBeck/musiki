@@ -615,6 +615,9 @@
     });
 
   function init(genres) {
+    // Update stats bar
+    document.getElementById('genre-count').textContent = genres.length + ' genres';
+
     // Build lookup map
     const genreMap = {};
     genres.forEach(g => { genreMap[g.id] = g; });
@@ -888,8 +891,17 @@
     document.getElementById('fit-btn').addEventListener('click', fitTimeline);
     svg.on('click', closePanel);
 
-    // Initial fit
-    setTimeout(fitTimeline, 80);
+    // Initial fit — use rAF retry in case fixed layout isn't computed yet
+    function safeFit() {
+      const cw = canvasWrapper.clientWidth;
+      const ch = canvasWrapper.clientHeight;
+      if (cw === 0 || ch === 0) {
+        requestAnimationFrame(safeFit);
+        return;
+      }
+      fitTimeline();
+    }
+    requestAnimationFrame(safeFit);
 
     // ─── PANEL ─────────────────────────────────────────────────────────────────
     const genrePanel   = document.getElementById('genre-panel');
