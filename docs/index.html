@@ -181,7 +181,7 @@
     /* MAIN CONTAINER */
     #main-container {
       position: fixed;
-      top: 96px; left: 0; right: 0; bottom: 32px;
+      top: 96px; left: 0; right: 0; bottom: 102px;
       display: flex;
       overflow: hidden;
     }
@@ -208,7 +208,6 @@
       display: flex;
       align-items: center;
       padding-left: 14px;
-      color: #58a6ff;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -227,33 +226,51 @@
     }
 
     #canvas-wrapper.grabbing { cursor: grabbing; }
-
     #timeline-svg { display: block; }
 
     /* NODE STYLES */
     .node { cursor: pointer; }
-    .node circle { stroke: white; stroke-width: 1; transition: r 0.1s, stroke-width 0.1s; }
-    .node:hover circle { stroke-width: 2; }
-    .node.highlighted circle { stroke-width: 2.5; stroke: #fff; filter: drop-shadow(0 0 6px rgba(255,255,255,0.5)); }
+    .node circle {
+      stroke: rgba(255,255,255,0.6);
+      stroke-width: 1;
+      transition: opacity 0.15s;
+    }
+    .node.root circle {
+      stroke: rgba(255,255,255,0.9);
+      stroke-width: 1.5;
+    }
+    .node.dimmed circle { opacity: 0.06; }
+    .node.dimmed text { opacity: 0.06; }
 
     .node-label {
-      fill: #aaa;
-      font-size: 10px;
+      fill: #ccc;
+      font-size: 9px;
       pointer-events: none;
       text-anchor: middle;
       font-family: system-ui, -apple-system, sans-serif;
     }
+    .node.root .node-label {
+      fill: #e6edf3;
+      font-size: 10px;
+      font-weight: 600;
+    }
 
-    .labels-hidden .node-label { display: none; }
-    .labels-visible .node-label { display: block; }
-
-    /* EDGE STYLES */
-    .edge { fill: none; }
-
-    /* DIM STATES */
-    .node.dimmed circle { opacity: 0.08; }
-    .node.dimmed text { opacity: 0.08; }
-    .edge.dimmed { opacity: 0.03 !important; }
+    /* EDGES: hidden by default */
+    .edge {
+      fill: none;
+      stroke-opacity: 0;
+      pointer-events: none;
+      transition: stroke-opacity 0.12s;
+    }
+    .edge.parent-edge {
+      stroke-dasharray: 5 3;
+    }
+    .edge.child-edge {
+      stroke-dasharray: none;
+    }
+    .edge.active {
+      stroke-opacity: 0.75;
+    }
 
     /* GENRE PANEL */
     #genre-panel {
@@ -393,10 +410,40 @@
       z-index: 500;
       display: none;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      max-width: 200px;
     }
 
     .tooltip-name { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
     .tooltip-meta { color: #8b949e; font-size: 11px; }
+    .tooltip-hint { color: #484f58; font-size: 10px; margin-top: 4px; }
+
+    /* MINIMAP */
+    #minimap-container {
+      position: fixed;
+      bottom: 32px;
+      left: 150px;
+      right: 0;
+      height: 70px;
+      background: #0a0e14;
+      border-top: 1px solid #21262d;
+      z-index: 150;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #minimap-label {
+      position: absolute;
+      left: 8px; top: 4px;
+      font-size: 9px;
+      color: #30363d;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #minimap-svg { display: block; }
 
     /* STATS BAR */
     #stats-bar {
@@ -420,15 +467,33 @@
 
     /* SVG AXIS */
     .axis-text { fill: #555; font-family: system-ui, -apple-system, sans-serif; }
-    .grid-line { stroke: #ffffff; stroke-opacity: 0.04; }
+    .grid-line { stroke: #ffffff; stroke-opacity: 0.03; }
     .axis-line { stroke: #30363d; }
+
+    /* HINT BADGE */
+    #hint-badge {
+      position: fixed;
+      top: 106px;
+      left: 160px;
+      background: rgba(88,166,255,0.08);
+      border: 1px solid rgba(88,166,255,0.15);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 11px;
+      color: #58a6ff;
+      pointer-events: none;
+      z-index: 180;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+    #hint-badge.hidden { opacity: 0; }
   </style>
 </head>
 <body>
 <div id="app">
   <div id="header">
     <span class="logo">Musiki</span>
-    <span class="subtitle">300 years of music evolution</span>
+    <span class="subtitle">500 years of music evolution</span>
     <div id="search-wrapper">
       <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -476,32 +541,41 @@
     </div>
   </div>
 
+  <div id="minimap-container">
+    <div id="minimap-label">Overview</div>
+    <svg id="minimap-svg"></svg>
+  </div>
+
   <div id="stats-bar">
-    <span id="genre-count">80 genres</span>
+    <span id="genre-count">201 genres</span>
     <span class="stats-sep">|</span>
     <span>10 genre families</span>
     <span class="stats-sep">|</span>
-    <span>1750 to 2025</span>
+    <span>1500 to 2025</span>
     <span id="zoom-info"></span>
     <span id="selected-info"></span>
   </div>
 </div>
 
+<div id="hint-badge">Hover a node to reveal connections. Click to pin.</div>
+
 <div id="tooltip">
   <div class="tooltip-name" id="tt-name"></div>
   <div class="tooltip-meta" id="tt-meta"></div>
+  <div class="tooltip-hint" id="tt-hint"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function() {
   // ─── CONSTANTS ───────────────────────────────────────────────────────────────
-  const SVG_WIDTH    = 3200;
-  const AXIS_HEIGHT  = 64;
-  const LANE_HEIGHT  = 100;
-  const LANE_COUNT   = 10;
-  const LEFT_MARGIN  = 10; // labels are overlaid, not in SVG margin
-  const SVG_HEIGHT   = AXIS_HEIGHT + LANE_COUNT * LANE_HEIGHT;
+  const SVG_WIDTH  = 4200;
+  const AXIS_HEIGHT = 64;
+  const LANE_COUNT  = 10;
+  const TIME_START  = 1490;
+  const TIME_END    = 2028;
+  const X_LEFT      = 20;
+  const X_RIGHT     = SVG_WIDTH - 30;
 
   const LANE_NAMES = [
     'Classical & European',
@@ -532,20 +606,24 @@
   // Explicit lane assignments
   const LANE_EXPLICIT = {
     // Lane 0: Classical & European
-    'classical': 0,
+    'classical': 0, 'baroque': 0, 'opera': 0, 'renaissance-polyphony': 0,
+    'romantic-classical': 0, 'impressionist-classical': 0,
     // Lane 1: Blues & R&B
     'blues': 1, 'rhythm-and-blues': 1, 'soul': 1, 'funk': 1,
     'motown': 1, 'neo-soul': 1, 'new-jack-swing': 1,
     // Lane 2: Folk & Country
     'folk': 2, 'country': 2, 'bluegrass': 2, 'mento': 2,
+    'americana': 2, 'folk-rock': 2, 'singer-songwriter': 2,
+    'indie-folk': 2, 'dream-folk': 2, 'folktronica': 2,
     // Lane 3: Gospel
-    'gospel': 3,
+    'gospel': 3, 'spiritual': 3, 'contemporary-christian': 3,
     // Lane 4: Jazz
     'jazz': 4, 'bebop': 4, 'modal-jazz': 4, 'free-jazz': 4,
     'fusion': 4, 'jazz-rap': 4, 'bossa-nova': 4, 'samba': 4,
+    'swing': 4, 'big-band': 4, 'cool-jazz': 4, 'nu-jazz': 4,
     // Lane 5: Caribbean & Reggae
     'ska': 5, 'reggae': 5, 'dub': 5, 'dancehall': 5,
-    'garage-uk': 5, 'grime': 5, 'dubstep': 5,
+    'garage-uk': 5, 'grime': 5, 'dubstep': 5, 'calypso': 5,
     // Lane 6: Rock & Metal
     'rock-and-roll': 6, 'classic-rock': 6, 'psychedelic-rock': 6,
     'progressive-rock': 6, 'hard-rock': 6, 'heavy-metal': 6,
@@ -555,25 +633,35 @@
     'grunge': 6, 'indie-rock': 6, 'indie-pop': 6,
     'shoegaze': 6, 'dream-pop': 6, 'emo': 6,
     'post-rock': 6, 'math-rock': 6, 'glam-rock': 6,
+    'deathcore': 6, 'bedroom-pop': 6,
     // Lane 7: Electronic & Club
     'electronic': 7, 'disco': 7, 'house': 7, 'deep-house': 7,
     'techno': 7, 'trance': 7, 'drum-and-bass': 7, 'jungle': 7,
     'ambient': 7, 'idm': 7, 'progressive-house': 7, 'happy-hardcore': 7,
+    'tech-house': 7, 'electro-house': 7, 'hardstyle': 7, 'footwork': 7,
+    'electroclash': 7, 'chillwave': 7, 'indie-electronic': 7, 'nu-disco': 7,
+    'vaporwave': 7, 'retrowave': 7, 'edm': 7, 'future-bass': 7,
+    'afro-house': 7, 'tropical-house': 7, 'hyperpop': 7,
     // Lane 8: Hip-Hop & Urban
     'hip-hop': 8, 'gangsta-rap': 8, 'conscious-hip-hop': 8,
     'trap': 8, 'reggaeton': 8, 'reaggeton': 8,
+    'lo-fi-hip-hop': 8, 'cloud-rap': 8, 'drill': 8, 'phonk': 8,
+    'jazz-rap': 8, 'crunk': 8,
     // Lane 9: Pop & Global
     'pop': 9, 'k-pop': 9, 'latin-pop': 9, 'afrobeats': 9,
     'afrobeat': 9, 'highlife': 9, 'amapiano': 9, 'cumbia': 9,
-    'salsa': 9, 'flamenco': 9, 'indian-classical': 9
+    'salsa': 9, 'flamenco': 9, 'indian-classical': 9,
+    'afro-soul': 9
   };
 
   function getEraColor(year) {
-    if (year < 1900) return '#8B4513';
-    if (year < 1930) return '#CD853F';
-    if (year < 1950) return '#DAA520';
-    if (year < 1960) return '#4169E1';
-    if (year < 1970) return '#9370DB';
+    if (year < 1700) return '#7c6f5a';
+    if (year < 1850) return '#8B7355';
+    if (year < 1900) return '#CD853F';
+    if (year < 1930) return '#DAA520';
+    if (year < 1950) return '#4169E1';
+    if (year < 1960) return '#9370DB';
+    if (year < 1970) return '#3CB371';
     if (year < 1980) return '#FF8C00';
     if (year < 1990) return '#FF1493';
     if (year < 2000) return '#00CED1';
@@ -591,7 +679,8 @@
     return Math.floor(year / 10) * 10 + 's';
   }
 
-  function assignLane(genre, genreMap, visited = new Set()) {
+  function assignLane(genre, genreMap, visited) {
+    if (!visited) visited = new Set();
     if (LANE_EXPLICIT[genre.id] !== undefined) return LANE_EXPLICIT[genre.id];
     if (visited.has(genre.id)) return 9;
     visited.add(genre.id);
@@ -615,10 +704,8 @@
     });
 
   function init(genres) {
-    // Update stats bar
     document.getElementById('genre-count').textContent = genres.length + ' genres';
 
-    // Build lookup map
     const genreMap = {};
     genres.forEach(g => { genreMap[g.id] = g; });
 
@@ -627,38 +714,69 @@
       g.lane = assignLane(g, genreMap);
     });
 
-    // Time scale
-    const TIME_START = 1750;
-    const TIME_END   = 2025;
-    const X_LEFT  = 20;
-    const X_RIGHT = SVG_WIDTH - 30;
+    // Build adjacency maps
+    const childrenOf = {}; // parentId -> [child genres]
+    const parentsOf  = {}; // childId  -> [parent genres]
+    genres.forEach(g => {
+      parentsOf[g.id] = (g.parent_ids || []).map(pid => genreMap[pid]).filter(Boolean);
+      (g.parent_ids || []).forEach(pid => {
+        if (!childrenOf[pid]) childrenOf[pid] = [];
+        childrenOf[pid].push(g);
+      });
+    });
 
+    // Adaptive lane heights based on genre count
+    const laneCounts = new Array(LANE_COUNT).fill(0);
+    genres.forEach(g => laneCounts[g.lane]++);
+
+    const MIN_LANE_H = 55;
+    const MAX_LANE_H = 230;
+    const maxCount   = Math.max(...laneCounts);
+    const minCount   = 1;
+
+    const laneHeights = laneCounts.map(count => {
+      const c = Math.max(count, minCount);
+      return Math.round(MIN_LANE_H + (c - minCount) / (maxCount - minCount) * (MAX_LANE_H - MIN_LANE_H));
+    });
+
+    // Lane y-offsets (cumulative)
+    const laneOffsets = [];
+    let yAcc = AXIS_HEIGHT;
+    for (let i = 0; i < LANE_COUNT; i++) {
+      laneOffsets.push(yAcc);
+      yAcc += laneHeights[i];
+    }
+    const SVG_HEIGHT = yAcc;
+
+    // Time scale
     const timeScale = d3.scaleLinear()
       .domain([TIME_START, TIME_END])
       .range([X_LEFT, X_RIGHT]);
 
-    // Group by lane+year for vertical distribution
+    // Group genres by lane+year for vertical stacking
     const laneYearGroups = {};
     genres.forEach(g => {
-      const key = `${g.lane}:${g.origin_year}`;
+      const key = g.lane + ':' + g.origin_year;
       if (!laneYearGroups[key]) laneYearGroups[key] = [];
       laneYearGroups[key].push(g);
     });
-
-    // Sort each group by id for stable ordering
     Object.values(laneYearGroups).forEach(grp => grp.sort((a, b) => a.id < b.id ? -1 : 1));
 
-    // Assign positions
+    // Assign x, y positions with vertical offset for collisions
     genres.forEach(g => {
-      const key = `${g.lane}:${g.origin_year}`;
+      const key = g.lane + ':' + g.origin_year;
       const group = laneYearGroups[key];
       const idx = group.findIndex(x => x.id === g.id);
-      const n = group.length;
-      const spacing = Math.min(20, (LANE_HEIGHT - 26) / Math.max(n, 1));
-      const laneTop = AXIS_HEIGHT + g.lane * LANE_HEIGHT;
-      const laneMid = laneTop + LANE_HEIGHT / 2;
+      const n   = group.length;
+      const laneH   = laneHeights[g.lane];
+      const laneTop = laneOffsets[g.lane];
+      const pad     = 16;
+      const usable  = laneH - pad * 2;
+      const spacing = n <= 1 ? 0 : Math.min(16, usable / (n - 1));
+      const totalSpan = (n - 1) * spacing;
+      const laneMid = laneTop + laneH / 2;
       g.x = timeScale(g.origin_year);
-      g.y = laneMid + (idx - (n - 1) / 2) * spacing;
+      g.y = laneMid - totalSpan / 2 + idx * spacing;
     });
 
     // ─── SVG SETUP ─────────────────────────────────────────────────────────────
@@ -666,25 +784,21 @@
       .attr('width', SVG_WIDTH)
       .attr('height', SVG_HEIGHT);
 
-    // Lane background rects
+    // Background rects for lanes
     const bgGroup = svg.append('g').attr('class', 'bg-group');
     for (let i = 0; i < LANE_COUNT; i++) {
       bgGroup.append('rect')
         .attr('x', 0)
-        .attr('y', AXIS_HEIGHT + i * LANE_HEIGHT)
+        .attr('y', laneOffsets[i])
         .attr('width', SVG_WIDTH)
-        .attr('height', LANE_HEIGHT)
+        .attr('height', laneHeights[i])
         .attr('fill', i % 2 === 0 ? '#0d1117' : '#0f1419');
     }
-
-    // Subtle lane separator lines
     for (let i = 1; i < LANE_COUNT; i++) {
       bgGroup.append('line')
         .attr('x1', 0).attr('x2', SVG_WIDTH)
-        .attr('y1', AXIS_HEIGHT + i * LANE_HEIGHT)
-        .attr('y2', AXIS_HEIGHT + i * LANE_HEIGHT)
-        .attr('stroke', '#1c2128')
-        .attr('stroke-width', 1);
+        .attr('y1', laneOffsets[i]).attr('y2', laneOffsets[i])
+        .attr('stroke', '#1c2128').attr('stroke-width', 1);
     }
 
     // Main zoomable group
@@ -694,15 +808,9 @@
     const axisGroup = mainGroup.append('g').attr('id', 'axis-group');
 
     const decadeTicks = [];
-    for (let y = 1750; y <= 2025; y += 10) decadeTicks.push(y);
+    for (let y = 1500; y <= 2030; y += 10) decadeTicks.push(y);
 
-    const allTicks = [
-      1750, 1800, 1850, 1900, 1910, 1920, 1930, 1940,
-      1950, 1960, 1970, 1975, 1980, 1985, 1990, 1995,
-      2000, 2005, 2010, 2015, 2020, 2025
-    ];
-
-    // Grid lines at decades
+    // Grid lines
     decadeTicks.forEach(yr => {
       axisGroup.append('line')
         .attr('class', 'grid-line')
@@ -716,27 +824,43 @@
       .attr('x1', 0).attr('x2', SVG_WIDTH)
       .attr('y1', AXIS_HEIGHT).attr('y2', AXIS_HEIGHT);
 
+    // Major century markers with shaded eras
+    const centuryMarkers = [1600, 1700, 1800, 1900, 2000];
+    const centuryColors  = ['#ffffff05', '#ffffff05', '#ffffff04', '#58a6ff06', '#58a6ff04'];
+    centuryMarkers.forEach((yr, ci) => {
+      const nextYr = centuryMarkers[ci + 1] || TIME_END;
+      if (yr >= TIME_START) {
+        axisGroup.append('rect')
+          .attr('x', timeScale(yr))
+          .attr('y', 0)
+          .attr('width', timeScale(nextYr) - timeScale(yr))
+          .attr('height', AXIS_HEIGHT)
+          .attr('fill', centuryColors[ci] || '#ffffff03');
+      }
+    });
+
     // Tick marks and labels
-    allTicks.forEach(yr => {
-      const x = timeScale(yr);
-      const isMajor = yr % 50 === 0;
-      const isMid = yr % 10 === 0;
-      const tickLen = isMajor ? 10 : isMid ? 7 : 4;
+    decadeTicks.forEach(yr => {
+      const x       = timeScale(yr);
+      const isCentury = yr % 100 === 0;
+      const is50    = yr % 50 === 0;
+      const isMajor = yr % 10 === 0;
+      const tickLen = isCentury ? 14 : is50 ? 10 : 6;
 
       axisGroup.append('line')
         .attr('x1', x).attr('x2', x)
         .attr('y1', AXIS_HEIGHT - tickLen).attr('y2', AXIS_HEIGHT)
-        .attr('stroke', isMajor ? '#555' : '#3a3f47')
-        .attr('stroke-width', 1);
+        .attr('stroke', isCentury ? '#666' : is50 ? '#444' : '#2a2f36')
+        .attr('stroke-width', isCentury ? 1.5 : 1);
 
-      if (isMid) {
+      if (isMajor) {
         axisGroup.append('text')
           .attr('class', 'axis-text')
           .attr('x', x)
           .attr('y', AXIS_HEIGHT - tickLen - 5)
           .attr('text-anchor', 'middle')
-          .attr('font-size', isMajor ? '12px' : '10px')
-          .attr('fill', isMajor ? '#666' : '#3a3f47')
+          .attr('font-size', isCentury ? '13px' : is50 ? '11px' : '9px')
+          .attr('fill', isCentury ? '#777' : is50 ? '#555' : '#333')
           .text(yr);
       }
     });
@@ -747,83 +871,203 @@
     genres.forEach(child => {
       (child.parent_ids || []).forEach(pid => {
         const parent = genreMap[pid];
-        if (!parent || parent.x === undefined) return;
+        if (!parent || parent.x === undefined || child.x === undefined) return;
 
         const x1 = parent.x, y1 = parent.y;
         const x2 = child.x,  y2 = child.y;
-
-        // Always flow left-to-right in bezier control points
-        const minX = Math.min(x1, x2);
-        const maxX = Math.max(x1, x2);
-        const dx = maxX - minX;
-        const cp1x = x1 + (x2 - x1) / 3;
-        const cp2x = x2 - (x2 - x1) / 3;
+        const cpx1 = x1 + (x2 - x1) * 0.4;
+        const cpx2 = x1 + (x2 - x1) * 0.6;
 
         edgeGroup.append('path')
-          .attr('class', `edge edge-child-${child.id} edge-parent-${pid}`)
-          .attr('d', `M ${x1} ${y1} C ${cp1x} ${y1} ${cp2x} ${y2} ${x2} ${y2}`)
-          .attr('stroke', getEraColor(child.origin_year))
-          .attr('stroke-opacity', 0.35)
+          .attr('class', 'edge')
+          .attr('d', 'M ' + x1 + ' ' + y1 + ' C ' + cpx1 + ' ' + y1 + ' ' + cpx2 + ' ' + y2 + ' ' + x2 + ' ' + y2)
+          .attr('stroke', LANE_COLORS[parent.lane])
           .attr('stroke-width', 1.5)
-          .datum({ childId: child.id, parentId: pid });
+          .attr('data-child', child.id)
+          .attr('data-parent', pid);
       });
     });
 
     // ─── NODES ─────────────────────────────────────────────────────────────────
-    const nodeGroup = mainGroup.append('g').attr('id', 'nodes').attr('class', 'labels-hidden');
+    const nodeGroup = mainGroup.append('g').attr('id', 'nodes');
 
     const tooltip = document.getElementById('tooltip');
     const ttName  = document.getElementById('tt-name');
     const ttMeta  = document.getElementById('tt-meta');
+    const ttHint  = document.getElementById('tt-hint');
 
-    let selectedId = null;
+    let pinnedId   = null;
+    let hoveredId  = null;
 
     const nodeEls = nodeGroup.selectAll('.node')
       .data(genres, d => d.id)
       .enter()
       .append('g')
-      .attr('class', d => `node node-${d.id}`)
-      .attr('transform', d => `translate(${d.x}, ${d.y})`);
+      .attr('class', d => 'node' + (d.parent_ids.length === 0 ? ' root' : ''))
+      .attr('transform', d => 'translate(' + d.x + ',' + d.y + ')');
 
+    // Circles
     nodeEls.append('circle')
       .attr('r', d => d.parent_ids.length === 0 ? 7 : 5)
       .attr('fill', d => getEraColor(d.origin_year))
-      .attr('stroke', 'white')
-      .attr('stroke-width', 1)
-      .on('mouseover', function(event, d) {
-        if (selectedId !== d.id) {
-          ttName.textContent = d.name;
-          ttMeta.textContent = d.origin_year + ' · ' + d.region;
-          tooltip.style.display = 'block';
+      .attr('stroke', 'rgba(255,255,255,0.6)')
+      .attr('stroke-width', d => d.parent_ids.length === 0 ? 1.5 : 1);
+
+    // Labels: show only for root genres (no parents) by default
+    nodeEls.append('text')
+      .attr('class', 'node-label')
+      .attr('y', d => (d.parent_ids.length === 0 ? 7 : 5) + 13)
+      .attr('opacity', d => d.parent_ids.length === 0 ? 1 : 0)
+      .text(d => d.name);
+
+    // ─── HOVER / SELECTION LOGIC ───────────────────────────────────────────────
+    function showConnections(id) {
+      hoveredId = id;
+      const g = genreMap[id];
+      if (!g) return;
+
+      const parentIds  = new Set(g.parent_ids || []);
+      const childIds   = new Set((childrenOf[id] || []).map(c => c.id));
+      const connected  = new Set([id, ...parentIds, ...childIds]);
+
+      // Fade/highlight nodes
+      nodeEls.each(function(d) {
+        const el = d3.select(this);
+        const isActive = connected.has(d.id);
+        el.select('circle')
+          .attr('opacity', isActive ? 1 : 0.07)
+          .attr('stroke', d.id === id ? '#fff' : 'rgba(255,255,255,0.6)')
+          .attr('stroke-width', d.id === id ? 2 : (d.parent_ids.length === 0 ? 1.5 : 1));
+        el.select('text')
+          .attr('opacity', isActive ? 1 : 0);
+      });
+
+      // Show edges: parent edges (dashed) and child edges (solid)
+      d3.selectAll('.edge').each(function() {
+        const el      = d3.select(this);
+        const childId = this.getAttribute('data-child');
+        const parentId = this.getAttribute('data-parent');
+
+        if (childId === id) {
+          // Edge from parent -> this node = parent edge (dashed, parent lane color)
+          const parentG = genreMap[parentId];
+          el.classed('active', true)
+            .classed('parent-edge', true)
+            .classed('child-edge', false)
+            .attr('stroke', parentG ? LANE_COLORS[parentG.lane] : '#58a6ff')
+            .attr('stroke-width', 1.5);
+        } else if (parentId === id) {
+          // Edge from this node -> child = child edge (solid, this node's color)
+          el.classed('active', true)
+            .classed('child-edge', true)
+            .classed('parent-edge', false)
+            .attr('stroke', LANE_COLORS[g.lane])
+            .attr('stroke-width', 1.5);
+        } else {
+          el.classed('active', false)
+            .classed('parent-edge', false)
+            .classed('child-edge', false);
         }
+      });
+
+      // Tooltip (only when not pinned)
+      if (id !== pinnedId) {
+        const parentCount = parentIds.size;
+        const childCount  = childIds.size;
+        ttName.textContent = g.name;
+        ttMeta.textContent = g.origin_year + ' · ' + g.region;
+        ttHint.textContent = (parentCount ? parentCount + ' parent' + (parentCount > 1 ? 's' : '') : '') +
+          (parentCount && childCount ? ' · ' : '') +
+          (childCount ? childCount + ' child' + (childCount > 1 ? 'ren' : '') : '') +
+          ((!parentCount && !childCount) ? 'Root genre' : '') +
+          ' — click to pin';
+        tooltip.style.display = 'block';
+      }
+    }
+
+    function hideConnections() {
+      hoveredId = null;
+      if (pinnedId) return; // keep pinned state
+
+      // Restore all nodes
+      nodeEls.each(function(d) {
+        const el = d3.select(this);
+        el.select('circle')
+          .attr('opacity', 1)
+          .attr('stroke', 'rgba(255,255,255,0.6)')
+          .attr('stroke-width', d.parent_ids.length === 0 ? 1.5 : 1);
+        el.select('text')
+          .attr('opacity', d.parent_ids.length === 0 ? 1 : 0);
+      });
+
+      // Hide all edges
+      d3.selectAll('.edge')
+        .classed('active', false)
+        .classed('parent-edge', false)
+        .classed('child-edge', false);
+
+      tooltip.style.display = 'none';
+    }
+
+    function pinNode(id) {
+      pinnedId = id;
+      tooltip.style.display = 'none';
+      document.getElementById('selected-info').textContent = genreMap[id] ? genreMap[id].name : '';
+      openPanel(genreMap[id]);
+    }
+
+    function unpinNode() {
+      if (!pinnedId) return;
+      pinnedId = null;
+      document.getElementById('selected-info').textContent = '';
+      hideConnections();
+      closePanel();
+    }
+
+    // Mouse events on circles
+    nodeEls.select('circle')
+      .on('mouseenter', function(event, d) {
+        showConnections(d.id);
       })
       .on('mousemove', function(event) {
         tooltip.style.left = (event.clientX + 16) + 'px';
-        tooltip.style.top  = (event.clientY - 36) + 'px';
+        tooltip.style.top  = Math.max(10, event.clientY - 60) + 'px';
       })
       .on('mouseleave', function() {
         tooltip.style.display = 'none';
+        if (hoveredId && hoveredId !== pinnedId) hideConnections();
+        else if (pinnedId) showConnections(pinnedId);
       })
       .on('click', function(event, d) {
         event.stopPropagation();
         tooltip.style.display = 'none';
-        openPanel(d);
+        if (pinnedId === d.id) {
+          unpinNode();
+        } else {
+          pinNode(d.id);
+          showConnections(d.id);
+        }
       });
 
-    nodeEls.append('text')
-      .attr('class', 'node-label')
-      .attr('y', d => (d.parent_ids.length === 0 ? 7 : 5) + 13)
-      .text(d => d.name);
+    // Click on background to unpin
+    svg.on('click', function(event) {
+      if (event.target === svg.node() || event.target.closest('#main-group') === mainGroup.node()) {
+        // check it's not a node
+        if (!event.target.closest('.node')) {
+          unpinNode();
+        }
+      }
+    });
 
     // ─── LANE LABELS (DOM overlay) ────────────────────────────────────────────
     const labelsInner = document.getElementById('lane-labels-inner');
-    const labelDivs = [];
+    const labelDivs   = [];
 
     for (let i = 0; i < LANE_COUNT; i++) {
       const div = document.createElement('div');
       div.className = 'lane-label-item';
       div.style.position = 'absolute';
-      div.style.left = '0';
+      div.style.left  = '0';
       div.style.right = '0';
       div.style.color = LANE_COLORS[i];
       div.style.background = i % 2 === 0 ? '#0d1117' : '#0f1419';
@@ -833,17 +1077,16 @@
     }
 
     function updateLaneLabels(transform) {
-      const k = transform.k;
-      const ty = transform.y;
+      const k = transform.k, ty = transform.y;
       labelDivs.forEach((div, i) => {
-        const svgTop = AXIS_HEIGHT + i * LANE_HEIGHT;
+        const svgTop   = laneOffsets[i];
         const screenTop = svgTop * k + ty;
-        const screenH = LANE_HEIGHT * k;
+        const screenH   = laneHeights[i] * k;
         div.style.top    = screenTop + 'px';
         div.style.height = screenH + 'px';
         const fs = Math.max(8, Math.min(11, 10 * Math.sqrt(k)));
         div.style.fontSize = fs + 'px';
-        div.style.opacity = k < 0.25 ? '0' : '1';
+        div.style.opacity  = k < 0.2 ? '0' : '1';
       });
     }
 
@@ -851,7 +1094,7 @@
     const canvasWrapper = document.getElementById('canvas-wrapper');
 
     const zoom = d3.zoom()
-      .scaleExtent([0.25, 5])
+      .scaleExtent([0.15, 8])
       .on('zoom', onZoom)
       .on('start', () => canvasWrapper.classList.add('grabbing'))
       .on('end',   () => canvasWrapper.classList.remove('grabbing'));
@@ -859,21 +1102,25 @@
     svg.call(zoom);
     svg.on('dblclick.zoom', null);
 
-    let currentK = 1;
+    let lastTransform = d3.zoomIdentity;
 
     function onZoom(event) {
       const t = event.transform;
-      currentK = t.k;
+      lastTransform = t;
       mainGroup.attr('transform', t);
       bgGroup.attr('transform', t);
       updateLaneLabels(t);
 
-      // Toggle labels
-      const showLabels = t.k > 0.7;
-      nodeGroup.classed('labels-visible', showLabels).classed('labels-hidden', !showLabels);
+      // Show all labels when zoomed in closely
+      const showAllLabels = t.k > 1.2;
+      nodeEls.select('text')
+        .attr('opacity', function(d) {
+          if (pinnedId || hoveredId) return null; // let showConnections manage
+          return (d.parent_ids.length === 0 || showAllLabels) ? 1 : 0;
+        });
 
-      // Zoom indicator
       document.getElementById('zoom-info').textContent = Math.round(t.k * 100) + '%';
+      updateMinimapViewport(t);
     }
 
     function fitTimeline() {
@@ -881,7 +1128,7 @@
       const ch = canvasWrapper.clientHeight;
       const scaleX = cw / SVG_WIDTH;
       const scaleY = ch / SVG_HEIGHT;
-      const scale = Math.min(scaleX, scaleY) * 0.97;
+      const scale = Math.min(scaleX, scaleY) * 0.95;
       const tx = (cw - SVG_WIDTH * scale) / 2;
       const ty = (ch - SVG_HEIGHT * scale) / 2;
       svg.transition().duration(500)
@@ -889,154 +1136,225 @@
     }
 
     document.getElementById('fit-btn').addEventListener('click', fitTimeline);
-    svg.on('click', closePanel);
 
-    // Initial fit — use rAF retry in case fixed layout isn't computed yet
     function safeFit() {
       const cw = canvasWrapper.clientWidth;
       const ch = canvasWrapper.clientHeight;
-      if (cw === 0 || ch === 0) {
-        requestAnimationFrame(safeFit);
-        return;
-      }
+      if (cw === 0 || ch === 0) { requestAnimationFrame(safeFit); return; }
       fitTimeline();
     }
     requestAnimationFrame(safeFit);
 
+    // ─── MINIMAP ───────────────────────────────────────────────────────────────
+    const mmContainer = document.getElementById('minimap-container');
+    const mmSvg = d3.select('#minimap-svg');
+    let mmW = 0, mmH = 0, mmScaleX = 1, mmScaleY = 1;
+    let mmViewport = null;
+
+    function initMinimap() {
+      mmW = mmContainer.clientWidth;
+      mmH = mmContainer.clientHeight;
+      if (mmW === 0 || mmH === 0) return;
+
+      mmScaleX = mmW / SVG_WIDTH;
+      mmScaleY = mmH / SVG_HEIGHT;
+
+      mmSvg.attr('width', mmW).attr('height', mmH);
+      mmSvg.selectAll('*').remove();
+
+      // Lane bands
+      for (let i = 0; i < LANE_COUNT; i++) {
+        mmSvg.append('rect')
+          .attr('x', 0)
+          .attr('y', laneOffsets[i] * mmScaleY)
+          .attr('width', mmW)
+          .attr('height', laneHeights[i] * mmScaleY)
+          .attr('fill', i % 2 === 0 ? '#0d1117' : '#0f1419');
+      }
+
+      // Genre dots
+      mmSvg.selectAll('.mm-dot')
+        .data(genres)
+        .enter()
+        .append('circle')
+        .attr('class', 'mm-dot')
+        .attr('cx', d => d.x * mmScaleX)
+        .attr('cy', d => d.y * mmScaleY)
+        .attr('r', d => d.parent_ids.length === 0 ? 2 : 1.5)
+        .attr('fill', d => LANE_COLORS[d.lane])
+        .attr('opacity', 0.7);
+
+      // Viewport rect
+      mmViewport = mmSvg.append('rect')
+        .attr('fill', 'rgba(88,166,255,0.06)')
+        .attr('stroke', '#58a6ff')
+        .attr('stroke-width', 1)
+        .attr('rx', 2);
+
+      // Minimap click-to-navigate
+      mmSvg.on('click', function(event) {
+        const [mx, my] = d3.pointer(event);
+        const svgX = mx / mmScaleX;
+        const svgY = my / mmScaleY;
+        const cw = canvasWrapper.clientWidth;
+        const ch = canvasWrapper.clientHeight;
+        const k  = lastTransform.k;
+        svg.transition().duration(250).call(
+          zoom.transform,
+          d3.zoomIdentity
+            .translate(cw / 2 - svgX * k, ch / 2 - svgY * k)
+            .scale(k)
+        );
+      });
+
+      // Minimap drag
+      const mmDrag = d3.drag()
+        .on('drag', function(event) {
+          const [mx, my] = [event.x, event.y];
+          const svgX = Math.max(0, Math.min(SVG_WIDTH, mx / mmScaleX));
+          const svgY = Math.max(0, Math.min(SVG_HEIGHT, my / mmScaleY));
+          const cw = canvasWrapper.clientWidth;
+          const ch = canvasWrapper.clientHeight;
+          const k  = lastTransform.k;
+          svg.call(zoom.transform,
+            d3.zoomIdentity
+              .translate(cw / 2 - svgX * k, ch / 2 - svgY * k)
+              .scale(k)
+          );
+        });
+      mmSvg.call(mmDrag);
+
+      updateMinimapViewport(lastTransform);
+    }
+
+    function updateMinimapViewport(transform) {
+      if (!mmViewport || mmW === 0) return;
+      const cw = canvasWrapper.clientWidth;
+      const ch = canvasWrapper.clientHeight;
+      const { k, x, y } = transform;
+      const x0 = Math.max(0, -x / k) * mmScaleX;
+      const y0 = Math.max(0, -y / k) * mmScaleY;
+      const w  = Math.min(SVG_WIDTH, cw / k) * mmScaleX;
+      const h  = Math.min(SVG_HEIGHT, ch / k) * mmScaleY;
+      mmViewport
+        .attr('x', x0)
+        .attr('y', y0)
+        .attr('width', w)
+        .attr('height', h);
+    }
+
+    // Init minimap after a short delay to let layout settle
+    setTimeout(initMinimap, 100);
+    window.addEventListener('resize', () => {
+      initMinimap();
+      fitTimeline();
+    });
+
+    // Dismiss hint badge after 4 seconds
+    setTimeout(() => {
+      const badge = document.getElementById('hint-badge');
+      if (badge) badge.classList.add('hidden');
+    }, 4000);
+
     // ─── PANEL ─────────────────────────────────────────────────────────────────
     const genrePanel   = document.getElementById('genre-panel');
     const panelContent = document.getElementById('panel-content');
-    const selectedInfo = document.getElementById('selected-info');
 
     function openPanel(genre) {
-      selectedId = genre.id;
-      tooltip.style.display = 'none';
-
-      // Highlight node
-      d3.selectAll('.node').classed('highlighted', false);
-      d3.select(`.node-${genre.id}`).classed('highlighted', true);
-
-      selectedInfo.textContent = genre.name;
-
-      const children = genres.filter(g => g.parent_ids.includes(genre.id));
-      const eraColor = getEraColor(genre.origin_year);
-      const lane = genre.lane;
+      if (!genre) return;
+      const children  = childrenOf[genre.id] || [];
+      const eraColor  = getEraColor(genre.origin_year);
+      const lane      = genre.lane;
 
       const parentChips = (genre.parent_ids || []).map(pid => {
         const p = genreMap[pid];
-        return p ? `<span class="chip" data-id="${pid}">${p.name}</span>` : '';
+        return p ? '<span class="chip" data-id="' + pid + '">' + p.name + '</span>' : '';
       }).join('');
 
       const childChips = children.map(c =>
-        `<span class="chip" data-id="${c.id}">${c.name}</span>`
+        '<span class="chip" data-id="' + c.id + '">' + c.name + '</span>'
       ).join('');
 
       const artistItems = (genre.key_artists || []).map(a =>
-        `<li><span class="list-dot" style="background:${eraColor}"></span>${a}</li>`
+        '<li><span class="list-dot" style="background:' + eraColor + '"></span>' + a + '</li>'
       ).join('');
 
       const trackItems = (genre.key_tracks || []).map(t =>
-        `<li><span class="list-dot" style="background:#484f58"></span>${t}</li>`
+        '<li><span class="list-dot" style="background:#484f58"></span>' + t + '</li>'
       ).join('');
 
-      const spotifyHTML = genre.spotify_track_id ? `
-        <div class="panel-section">
-          <div class="panel-section-title">Listen</div>
-          <div class="spotify-embed">
-            <iframe src="https://open.spotify.com/embed/track/${genre.spotify_track_id}"
-              width="100%" height="80" frameborder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"></iframe>
-          </div>
-        </div>` : '';
+      const spotifyHTML = genre.spotify_track_id ? (
+        '<div class="panel-section">' +
+        '<div class="panel-section-title">Listen</div>' +
+        '<div class="spotify-embed">' +
+        '<iframe src="https://open.spotify.com/embed/track/' + genre.spotify_track_id + '"' +
+        ' width="100%" height="80" frameborder="0"' +
+        ' allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"' +
+        ' loading="lazy"></iframe>' +
+        '</div></div>'
+      ) : '';
 
-      panelContent.innerHTML = `
-        <h2 class="panel-title">${genre.name}</h2>
-        <div class="panel-badges">
-          <span class="badge badge-era" style="background:${eraColor}">${getDecadeLabel(genre.origin_year)}</span>
-          <span class="badge badge-origin">${genre.origin_year} &middot; ${genre.region}</span>
-          <span class="badge badge-lane" style="color:${LANE_COLORS[lane]};border-color:${LANE_COLORS[lane]}30;background:${LANE_COLORS[lane]}12">${LANE_NAMES[lane]}</span>
-        </div>
-        ${genre.description ? `<p class="panel-description">${genre.description.replace(/\n\n/g, '</p><p class="panel-description" style="margin-top:-10px">').replace(/\n/g, ' ')}</p>` : ''}
-        ${parentChips ? `
-          <div class="panel-section">
-            <div class="panel-section-title">Evolved From</div>
-            <div class="chips">${parentChips}</div>
-          </div>` : ''}
-        ${childChips ? `
-          <div class="panel-section">
-            <div class="panel-section-title">Led To</div>
-            <div class="chips">${childChips}</div>
-          </div>` : ''}
-        ${artistItems ? `
-          <div class="panel-section">
-            <div class="panel-section-title">Key Artists</div>
-            <ul class="panel-list">${artistItems}</ul>
-          </div>` : ''}
-        ${trackItems ? `
-          <div class="panel-section">
-            <div class="panel-section-title">Key Tracks</div>
-            <ul class="panel-list">${trackItems}</ul>
-          </div>` : ''}
-        ${spotifyHTML}
-      `;
+      const descHTML = genre.description
+        ? '<p class="panel-description">' +
+          genre.description.replace(/\n\n/g, '</p><p class="panel-description" style="margin-top:-10px">').replace(/\n/g, ' ') +
+          '</p>'
+        : '';
 
-      // Chip navigation
+      panelContent.innerHTML =
+        '<h2 class="panel-title">' + genre.name + '</h2>' +
+        '<div class="panel-badges">' +
+        '<span class="badge badge-era" style="background:' + eraColor + '">' + getDecadeLabel(genre.origin_year) + '</span>' +
+        '<span class="badge badge-origin">' + genre.origin_year + ' &middot; ' + genre.region + '</span>' +
+        '<span class="badge badge-lane" style="color:' + LANE_COLORS[lane] + ';border-color:' + LANE_COLORS[lane] + '30;background:' + LANE_COLORS[lane] + '12">' + LANE_NAMES[lane] + '</span>' +
+        '</div>' +
+        descHTML +
+        (parentChips ? '<div class="panel-section"><div class="panel-section-title">Evolved From</div><div class="chips">' + parentChips + '</div></div>' : '') +
+        (childChips  ? '<div class="panel-section"><div class="panel-section-title">Led To</div><div class="chips">' + childChips + '</div></div>' : '') +
+        (artistItems ? '<div class="panel-section"><div class="panel-section-title">Key Artists</div><ul class="panel-list">' + artistItems + '</ul></div>' : '') +
+        (trackItems  ? '<div class="panel-section"><div class="panel-section-title">Key Tracks</div><ul class="panel-list">' + trackItems + '</ul></div>' : '') +
+        spotifyHTML;
+
       panelContent.querySelectorAll('.chip[data-id]').forEach(chip => {
         chip.addEventListener('click', e => {
           e.stopPropagation();
           const g = genreMap[chip.dataset.id];
-          if (g) openPanel(g);
+          if (g) {
+            pinnedId = g.id;
+            document.getElementById('selected-info').textContent = g.name;
+            showConnections(g.id);
+            openPanel(g);
+          }
         });
       });
 
       genrePanel.classList.add('open');
     }
 
-    function closePanel(event) {
-      if (event && event.target && event.target.closest && event.target.closest('#genre-panel')) return;
+    function closePanel() {
       genrePanel.classList.remove('open');
-      d3.selectAll('.node').classed('highlighted', false);
-      selectedId = null;
-      selectedInfo.textContent = '';
-      resetFilter();
     }
 
     document.getElementById('panel-close').addEventListener('click', e => {
       e.stopPropagation();
-      closePanel();
+      unpinNode();
     });
 
-    // ─── FILTER LOGIC ──────────────────────────────────────────────────────────
-    let activeEra    = 'all';
-    let searchTerm   = '';
+    // ─── ERA / SEARCH FILTERS ──────────────────────────────────────────────────
+    let activeEra  = 'all';
+    let searchTerm = '';
 
     function nodeVisible(d) {
-      const eraOk = activeEra === 'all' || getEraKey(d.origin_year) === activeEra;
+      const eraOk    = activeEra === 'all' || getEraKey(d.origin_year) === activeEra;
       const searchOk = !searchTerm || d.name.toLowerCase().includes(searchTerm) || d.id.includes(searchTerm);
       return eraOk && searchOk;
     }
 
     function applyFilter() {
-      d3.selectAll('.node').each(function(d) {
+      nodeEls.each(function(d) {
         d3.select(this).classed('dimmed', !nodeVisible(d));
       });
-      d3.selectAll('.edge').each(function(d) {
-        if (!d) return;
-        const child = genreMap[d.childId];
-        const show = child && nodeVisible(child);
-        d3.select(this).classed('dimmed', !show);
-      });
     }
 
-    function resetFilter() {
-      if (activeEra === 'all' && !searchTerm) {
-        d3.selectAll('.node').classed('dimmed', false);
-        d3.selectAll('.edge').classed('dimmed', false);
-      }
-    }
-
-    // Era buttons
     document.querySelectorAll('.era-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
@@ -1063,18 +1381,18 @@
       const matches = genres
         .filter(g => g.name.toLowerCase().includes(searchTerm) || g.id.includes(searchTerm))
         .sort((a, b) => {
-          const aStarts = a.name.toLowerCase().startsWith(searchTerm) ? 0 : 1;
-          const bStarts = b.name.toLowerCase().startsWith(searchTerm) ? 0 : 1;
-          return aStarts - bStarts || a.name.localeCompare(b.name);
+          const aS = a.name.toLowerCase().startsWith(searchTerm) ? 0 : 1;
+          const bS = b.name.toLowerCase().startsWith(searchTerm) ? 0 : 1;
+          return aS - bS || a.name.localeCompare(b.name);
         })
         .slice(0, 10);
 
       if (matches.length > 0) {
         searchDropdown.innerHTML = matches.map(g =>
-          `<div class="search-item" data-id="${g.id}">
-            <span>${g.name}</span>
-            <span class="search-item-year">${g.origin_year}</span>
-          </div>`
+          '<div class="search-item" data-id="' + g.id + '">' +
+          '<span>' + g.name + '</span>' +
+          '<span class="search-item-year">' + g.origin_year + '</span>' +
+          '</div>'
         ).join('');
         searchDropdown.classList.add('visible');
 
@@ -1082,11 +1400,14 @@
           item.addEventListener('click', () => {
             const g = genreMap[item.dataset.id];
             if (g) {
-              openPanel(g);
               searchDropdown.classList.remove('visible');
               searchInput.value = '';
               searchTerm = '';
               applyFilter();
+              pinnedId = g.id;
+              document.getElementById('selected-info').textContent = g.name;
+              showConnections(g.id);
+              openPanel(g);
             }
           });
         });
@@ -1114,7 +1435,7 @@
 
     // ─── KEYBOARD SHORTCUTS ────────────────────────────────────────────────────
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && selectedId) closePanel();
+      if (e.key === 'Escape' && pinnedId) unpinNode();
       if ((e.key === 'f' || e.key === 'F') && !e.target.matches('input')) fitTimeline();
       if (e.key === '/' && !e.target.matches('input')) {
         e.preventDefault();
