@@ -1,0 +1,1026 @@
+[
+  {
+    "id": "blues",
+    "name": "Blues",
+    "parent_ids": [],
+    "origin_year": 1900,
+    "origin_decade": "1900s",
+    "region": "United States",
+    "description": [
+      "Blues grew out of the Mississippi Delta in the late 19th and early 20th centuries, shaped by African-American laborers who wove work songs, field hollers, and sacred music into something rawer and more personal. Robert Johnson, Charley Patton, and Son House turned grief and longing into a 12-bar structure that would outlast them by a century.",
+      "The music moved north with the Great Migration. In Chicago, electric amplification turned Delta blues into the harder, louder urban sound of Muddy Waters and Howlin' Wolf. The genre's core vocabulary -- bent notes, call-and-response phrases, the I-IV-V chord progression -- became the shared grammar for rock, soul, and nearly every popular form that followed."
+    ],
+    "key_artists": ["Robert Johnson", "Muddy Waters", "B.B. King", "Howlin' Wolf", "Charley Patton"],
+    "key_tracks": ["Cross Road Blues", "Mannish Boy", "The Thrill Is Gone", "Smokestack Lightning"],
+    "spotify_track_id": "4gphxUgq0JSFv2BCLhNDiE",
+    "tags": ["root", "american", "delta"]
+  },
+  {
+    "id": "folk",
+    "name": "Folk",
+    "parent_ids": [],
+    "origin_year": 1850,
+    "origin_decade": "pre-1900",
+    "region": "Various",
+    "description": [
+      "Folk music is less a single genre than an ancient practice: the transmission of song through communities, without formal notation or commercial intent. What most people mean by folk today refers to the Anglo-American tradition of ballads, shanties, and protest songs that arrived in the United States with British and Irish immigrants and evolved independently from there.",
+      "The American folk revival of the late 1950s and early 1960s gave the tradition a new context. Woody Guthrie, Pete Seeger, and later Bob Dylan used acoustic guitar, plain language, and historical continuity to push back against the slickness of mainstream pop. Dylan's electric turn in 1965 broke with that purism but launched something new -- folk as a frame, not a formula."
+    ],
+    "key_artists": ["Woody Guthrie", "Pete Seeger", "Bob Dylan", "Joan Baez", "The Carter Family"],
+    "key_tracks": ["Blowin' in the Wind", "This Land Is Your Land", "The Times They Are A-Changin'", "Scarborough Fair"],
+    "spotify_track_id": "3lh0BahJd9mAAxNB2NDPQX",
+    "tags": ["root", "acoustic", "traditional"]
+  },
+  {
+    "id": "classical",
+    "name": "Classical",
+    "parent_ids": [],
+    "origin_year": 1600,
+    "origin_decade": "pre-1900",
+    "region": "Europe",
+    "description": [
+      "Western classical music spans roughly a thousand years, from Gregorian chant through the Baroque, Classical, and Romantic periods to the 20th-century avant-garde. The period most associated with the term -- the late 18th and 19th centuries -- produced Beethoven's symphonies, Mozart's operas, and the harmonic language that would underpin nearly all Western music to follow.",
+      "Classical music's lasting influence isn't in what it sounds like -- it's in the theoretical framework it established. Counterpoint, functional harmony, formal structure, and the orchestra itself are all tools that genres as disparate as progressive rock, hip-hop production, and electronic music continue to borrow from and react against."
+    ],
+    "key_artists": ["Ludwig van Beethoven", "Johann Sebastian Bach", "Wolfgang Amadeus Mozart", "Frederic Chopin", "Claude Debussy"],
+    "key_tracks": ["Symphony No. 9", "Clair de Lune", "The Four Seasons", "Moonlight Sonata"],
+    "spotify_track_id": "5ZLkc5RY1NM4FtGWEd6HOE",
+    "tags": ["root", "orchestral", "european"]
+  },
+  {
+    "id": "jazz",
+    "name": "Jazz",
+    "parent_ids": [],
+    "origin_year": 1900,
+    "origin_decade": "1900s",
+    "region": "United States",
+    "description": [
+      "Jazz emerged from New Orleans in the early 1900s, fusing African rhythmic traditions, blues tonality, European harmony, and the improvisational spirit of ragtime. The city's dense cultural mix -- Creole, African-American, Spanish, French -- created conditions for a music built on spontaneous invention rather than written scores.",
+      "What kept jazz vital wasn't any single style but its commitment to reinvention. Louis Armstrong elevated improvisation into high art in the 1920s. Bebop in the 1940s made the music faster and more complex. Miles Davis opened new harmonic territory with modal jazz in the late 1950s. Each generation pushed into new territory, and jazz has continued to absorb and transform whatever comes within reach."
+    ],
+    "key_artists": ["Louis Armstrong", "Miles Davis", "John Coltrane", "Duke Ellington", "Charlie Parker"],
+    "key_tracks": ["So What", "Take Five", "Round Midnight", "A Love Supreme"],
+    "spotify_track_id": "4vLYewWIvqkfATcbHOPGXy",
+    "tags": ["root", "american", "improvisation"]
+  },
+  {
+    "id": "gospel",
+    "name": "Gospel",
+    "parent_ids": [],
+    "origin_year": 1880,
+    "origin_decade": "pre-1900",
+    "region": "United States",
+    "description": [
+      "Gospel music developed in African-American churches in the decades following the Civil War, fusing sacred hymnody with the blues-influenced phrasing and call-and-response patterns that Black communities had carried through slavery. Thomas A. Dorsey -- not the bandleader, but the composer -- formalized a new template in the 1920s by pairing blues rhythms with devotional lyrics.",
+      "The music's power was always communal: the lead singer's cry answered by a choir, the emotion of the text given physical form through voice and movement. When Ray Charles, Aretha Franklin, and Sam Cooke crossed into secular music, they brought that intensity with them. Soul music, and much of what followed, is gospel pointed at the world rather than heaven."
+    ],
+    "key_artists": ["Mahalia Jackson", "Thomas A. Dorsey", "Aretha Franklin", "Sam Cooke", "Kirk Franklin"],
+    "key_tracks": ["Oh Happy Day", "Amazing Grace", "Take My Hand, Precious Lord", "How I Got Over"],
+    "spotify_track_id": null,
+    "tags": ["root", "american", "sacred", "church"]
+  },
+  {
+    "id": "country",
+    "name": "Country",
+    "parent_ids": [],
+    "origin_year": 1920,
+    "origin_decade": "1920s",
+    "region": "United States",
+    "description": [
+      "Country music took shape in the rural American South and Appalachian hills in the 1920s, when commercial recording companies started documenting music passed down orally for generations. The Bristol Sessions of 1927 -- where Ralph Peer recorded the Carter Family and Jimmie Rodgers in the same week -- mark the conventional starting point of country as a commercial genre.",
+      "The music drew from British and Irish folk traditions, church hymns, and blues, tied together by storytelling directness and an attachment to place. It has reinvented itself repeatedly: honky-tonk in the 1940s, outlaw country in the 1970s, the Nashville pop crossover of the 1990s. What has held is the narrative core -- songs about specific places, specific losses, and specific people."
+    ],
+    "key_artists": ["Hank Williams", "Johnny Cash", "Dolly Parton", "Jimmie Rodgers", "Patsy Cline"],
+    "key_tracks": ["Ring of Fire", "Your Cheatin' Heart", "I Will Always Love You", "Coal Miner's Daughter"],
+    "spotify_track_id": "4XRQiCF7T1hkTHiLCoJzPy",
+    "tags": ["root", "american", "southern", "storytelling"]
+  },
+  {
+    "id": "bluegrass",
+    "name": "Bluegrass",
+    "parent_ids": [],
+    "origin_year": 1945,
+    "origin_decade": "1940s",
+    "region": "United States",
+    "description": [
+      "Bluegrass crystallized in the mid-1940s around the music of mandolinist Bill Monroe and his Blue Grass Boys. Monroe drew from the string band traditions of the Appalachian South, the speed and precision of jazz, and the emotional directness of blues to create something that felt ancient and urgent at the same time.",
+      "The music relies on acoustic string instruments -- banjo, fiddle, mandolin, upright bass, guitar -- played with virtuosic speed and close-harmony singing. It never became mainstream in the way country did, but its technical demands and commitment to tradition have given it a devoted following. The genre experienced a wider cultural revival in the early 2000s, partly through the O Brother, Where Art Thou? soundtrack."
+    ],
+    "key_artists": ["Bill Monroe", "Earl Scruggs", "Lester Flatt", "Ricky Skaggs", "Alison Krauss"],
+    "key_tracks": ["Blue Moon of Kentucky", "Foggy Mountain Breakdown", "Man of Constant Sorrow", "Rocky Top"],
+    "spotify_track_id": null,
+    "tags": ["root", "american", "acoustic", "appalachian"]
+  },
+  {
+    "id": "rock",
+    "name": "Rock",
+    "parent_ids": ["blues", "folk", "country"],
+    "origin_year": 1954,
+    "origin_decade": "1950s",
+    "region": "United States",
+    "description": [
+      "Rock and roll emerged in the early 1950s when Black rhythm-and-blues collided with white country music, amplified by electric guitars and driven by a backbeat that hit teenagers somewhere below the intellect. Chuck Berry's guitar licks, Little Richard's vocal abandon, and Elvis Presley's rockabilly synthesis were all versions of the same cultural flash point.",
+      "What began as a single sound became a continent. By the 1960s, rock had splintered into psychedelic, folk-rock, hard rock, and progressive forms. By the 1970s, punk was tearing it down so it could be rebuilt again. Rock has never been one thing -- it's been the container for whatever generation of young people was most invested in making music that felt like theirs."
+    ],
+    "key_artists": ["Chuck Berry", "Elvis Presley", "The Beatles", "The Rolling Stones", "Led Zeppelin"],
+    "key_tracks": ["Johnny B. Goode", "Come Together", "Whole Lotta Love", "Satisfaction"],
+    "spotify_track_id": "1mea3bSkSGXuIRvnydlB5b",
+    "tags": ["electric", "guitar", "american", "youth"]
+  },
+  {
+    "id": "rb",
+    "name": "R&B",
+    "parent_ids": ["blues", "gospel", "jazz"],
+    "origin_year": 1943,
+    "origin_decade": "1940s",
+    "region": "United States",
+    "description": [
+      "Rhythm and blues was a label the music industry invented in 1949 to describe secular music made by and for Black Americans, replacing the condescending category of 'race records.' It covered a wide range: jump blues, gospel-influenced ballads, honking saxophone numbers, and the electric band sound developed in Kansas City and Chicago.",
+      "R&B was less a genre than an ongoing negotiation between restraint and release, sacred and secular, polish and rawness. Ray Charles synthesized gospel and blues in ways that scandalized churchgoers and conquered pop charts simultaneously. The lineage runs from him through Marvin Gaye and Stevie Wonder in the 1960s and 1970s, and on to the contemporary R&B that blurs into hip-hop, pop, and beyond."
+    ],
+    "key_artists": ["Ray Charles", "Ruth Brown", "Fats Domino", "Marvin Gaye", "Stevie Wonder"],
+    "key_tracks": ["What'd I Say", "I Got a Woman", "Superstition", "What's Going On"],
+    "spotify_track_id": "2dMVyTAMWRhO7XFhYcqAR0",
+    "tags": ["american", "black-american", "electric"]
+  },
+  {
+    "id": "soul",
+    "name": "Soul",
+    "parent_ids": ["gospel", "rb"],
+    "origin_year": 1954,
+    "origin_decade": "1950s",
+    "region": "United States",
+    "description": [
+      "Soul music emerged in the mid-1950s when artists like Ray Charles and Sam Cooke began applying the emotional intensity of gospel -- the ornamentation, the cry in the voice, the preacher's sense of urgency -- to secular lyrics and rhythm-and-blues arrangements. The sound coalesced into something distinct at Stax Records in Memphis and Motown in Detroit, each label developing its own aesthetic.",
+      "Stax ran on interracial house bands playing loose and live in the room; Motown was precision-engineered for pop crossover. Both produced music that was undeniably of its moment -- the civil rights era -- without always being explicitly political. Aretha Franklin's recordings for Atlantic in the late 1960s brought the two strands together in the most fully realized form the genre has ever achieved."
+    ],
+    "key_artists": ["Aretha Franklin", "Sam Cooke", "Otis Redding", "Marvin Gaye", "Al Green"],
+    "key_tracks": ["Respect", "(Sittin' On) The Dock of the Bay", "A Change Is Gonna Come", "Let's Stay Together"],
+    "spotify_track_id": "7s25THrKz86DM225dOYwnr",
+    "tags": ["american", "black-american", "church-influenced"]
+  },
+  {
+    "id": "funk",
+    "name": "Funk",
+    "parent_ids": ["soul", "rb", "jazz"],
+    "origin_year": 1965,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Funk arrived when James Brown stripped soul music down to its rhythmic skeleton. The melody and harmony stepped back; the groove moved to the front. The 'one' -- the first beat of the bar, hit hard -- became the organizing principle of a music built on interlocking bass, drums, and rhythm guitar rather than chord progressions or melodic development.",
+      "George Clinton expanded that foundation into something sprawling and theatrical with Parliament-Funkadelic, building elaborate stage shows and concept albums around a rhythm that never let up. Funk's influence is everywhere in modern music, mostly through sampling. The break beats that hip-hop built itself on came largely from James Brown's records; the bass lines that house and techno displaced were first played in the 1970s by Bootsy Collins and Larry Graham."
+    ],
+    "key_artists": ["James Brown", "George Clinton", "Sly Stone", "Bootsy Collins", "Prince"],
+    "key_tracks": ["Superbad", "Give Up the Funk", "Thank You (Falettinme Be Mice Elf Agin)", "Papa's Got a Brand New Bag"],
+    "spotify_track_id": "6RtPijgfPKROxEsd2XZRXZ",
+    "tags": ["groove", "rhythm", "black-american", "dance"]
+  },
+  {
+    "id": "ska",
+    "name": "Ska",
+    "parent_ids": ["rb", "jazz"],
+    "origin_year": 1955,
+    "origin_decade": "1950s",
+    "region": "Jamaica",
+    "description": [
+      "Ska developed in Kingston, Jamaica in the late 1950s as musicians absorbed American rhythm-and-blues from radio broadcasts and gave it a distinctly local rhythm: the guitar or piano hitting on the offbeats, the bass heavy and melodic, the tempo fast and celebratory. It was the first distinctly Jamaican pop music, and it preceded reggae by nearly two decades.",
+      "The genre arrived in Britain with Jamaican immigrants and found a second life there in the early 1980s, when the 2-Tone movement paired it with punk energy. Bands like the Specials and Madness used ska's tight rhythms as a vehicle for songs about race, unemployment, and street-level life in Thatcher's England. A third wave emerged in American alternative circles in the 1990s, though without the political urgency of the 2-Tone era."
+    ],
+    "key_artists": ["Prince Buster", "The Skatalites", "The Specials", "Madness", "Toots and the Maytals"],
+    "key_tracks": ["Al Capone", "A Message to You Rudy", "One Step Beyond", "Monkey Man"],
+    "spotify_track_id": null,
+    "tags": ["jamaican", "offbeat", "dance"]
+  },
+  {
+    "id": "bossa-nova",
+    "name": "Bossa Nova",
+    "parent_ids": ["jazz", "folk"],
+    "origin_year": 1958,
+    "origin_decade": "1950s",
+    "region": "Brazil",
+    "description": [
+      "Bossa nova emerged in Rio de Janeiro in the late 1950s from a generation of musicians who had absorbed American cool jazz and filtered it through the rhythmic traditions of Brazilian samba. The result was quieter and more harmonically complex than either parent -- intimate vocals, fingerpicked guitar, and chord substitutions borrowed from jazz but deployed with a Brazilian lightness.",
+      "Joao Gilberto's guitar technique, with its quiet precision and syncopated rhythms, defined the sound. Antonio Carlos Jobim's compositions -- including 'The Girl from Ipanema' and 'Corcovado' -- became standards known worldwide. The style reached American audiences through Stan Getz's collaborations with Gilberto in the early 1960s and has influenced quiet, harmonically rich music ever since."
+    ],
+    "key_artists": ["Joao Gilberto", "Antonio Carlos Jobim", "Astrud Gilberto", "Stan Getz", "Sergio Mendes"],
+    "key_tracks": ["The Girl from Ipanema", "Corcovado", "Wave", "Desafinado"],
+    "spotify_track_id": "1fLsS3iMkMQQRdvmj0KJN0",
+    "tags": ["brazilian", "latin", "jazz-influenced", "acoustic"]
+  },
+  {
+    "id": "flamenco",
+    "name": "Flamenco",
+    "parent_ids": ["folk"],
+    "origin_year": 1780,
+    "origin_decade": "pre-1900",
+    "region": "Spain",
+    "description": [
+      "Flamenco developed in Andalusia in southern Spain, drawing from the music of the Romani communities who settled there alongside Moorish, Jewish, and native Spanish influences. The tradition encompasses song (cante), guitar (toque), and dance (baile) as inseparable elements -- a solo flamenco performance integrates all three, with the guitarist responding to and supporting the singer or dancer in real time.",
+      "The emotional core of flamenco is duende -- an untranslatable quality of dark intensity and depth, the sense that the performer is accessing something painful and true. Paco de Lucia brought the guitar technique to a new level of sophistication in the 1970s, expanding flamenco's harmonic vocabulary through contact with jazz. The tradition remains alive in Andalusia and has influenced musicians globally."
+    ],
+    "key_artists": ["Paco de Lucia", "Camaron de la Isla", "Tomatito", "Diego el Cigala", "Estrella Morente"],
+    "key_tracks": ["Entre Dos Aguas", "La Leyenda del Tiempo", "Bulerias", "Farruca"],
+    "spotify_track_id": null,
+    "tags": ["spanish", "andalusian", "traditional", "dance"]
+  },
+  {
+    "id": "pop",
+    "name": "Pop",
+    "parent_ids": ["rock", "soul", "country"],
+    "origin_year": 1955,
+    "origin_decade": "1950s",
+    "region": "United States",
+    "description": [
+      "Pop music is defined less by sound than by intent: music made to reach the widest possible audience, optimized for immediate appeal, played on radio, and built around the single. It has no fixed instrumentation or structure -- it absorbs whatever sounds are current and packages them for mass consumption. The Brill Building songwriting era, Motown's assembly-line approach to hits, and Phil Spector's wall of sound were all early models.",
+      "Michael Jackson's Thriller in 1982 remains the archetype of pop at full amplitude: immaculate production, genre-crossing ambition, and hooks engineered to lodge in the brain and stay. Pop has continued to evolve by absorbing electronic production, hip-hop rhythms, and global sounds, but the goal -- to connect with everyone, immediately -- has not changed."
+    ],
+    "key_artists": ["Michael Jackson", "Madonna", "The Beatles", "Beyonce", "Taylor Swift"],
+    "key_tracks": ["Billie Jean", "Like a Prayer", "Hey Jude", "Crazy in Love"],
+    "spotify_track_id": "5ChkMS8OtdzJeqyybCc9R5",
+    "tags": ["mainstream", "radio", "hooks", "commercial"]
+  },
+  {
+    "id": "electronic",
+    "name": "Electronic",
+    "parent_ids": ["classical"],
+    "origin_year": 1968,
+    "origin_decade": "1960s",
+    "region": "Europe",
+    "description": [
+      "Electronic music as an organized genre grew from academic experiments in the 1950s and 1960s -- Pierre Schaeffer's musique concrete in Paris, Stockhausen's tape manipulations in Cologne, the BBC Radiophonic Workshop in London -- but it only reached popular consciousness when synthesizers became affordable in the early 1970s. Kraftwerk in Dusseldorf was the decisive moment: four Germans using electronic equipment to make music that was simultaneously cold and danceable.",
+      "The genre expanded in every direction at once. In the 1970s, Brian Eno and Tangerine Dream explored ambient textures. In the 1980s, Chicago and Detroit invented house and techno from drum machines and synthesizers. The 1990s brought rave culture, drum and bass, and trance. Today, electronic production underlies most of the music that gets made commercially -- the genre ate popular music whole."
+    ],
+    "key_artists": ["Kraftwerk", "Brian Eno", "Aphex Twin", "Daft Punk", "Donna Summer"],
+    "key_tracks": ["Autobahn", "Discreet Music", "Come to Daddy", "Around the World"],
+    "spotify_track_id": "1pklmbWoHaKNaFHuMnMeLn",
+    "tags": ["synthesizer", "machine", "dance", "experimental"]
+  },
+  {
+    "id": "hard-rock",
+    "name": "Hard Rock",
+    "parent_ids": ["rock"],
+    "origin_year": 1966,
+    "origin_decade": "1960s",
+    "region": "United Kingdom",
+    "description": [
+      "Hard rock emerged in the late 1960s when British bands began pushing the electric guitar to its limits -- higher volume, heavier riffs, louder drums, and a more aggressive attack than the blues rock they descended from. The Kinks' 'You Really Got Me,' the Who's feedback and destruction, and Cream's amplifier worship all pointed toward where the music was going.",
+      "Led Zeppelin consolidated the form in 1969, bringing together blues-derived riffs, a physically powerful rhythm section, and a vocalist in Robert Plant who matched the intensity of the instruments. AC/DC, Aerosmith, and Deep Purple took different angles on the same material. Hard rock remained commercially dominant through the 1970s and 1980s before grunge redefined what guitar-based rock was supposed to sound like."
+    ],
+    "key_artists": ["Led Zeppelin", "Deep Purple", "AC/DC", "Aerosmith", "The Who"],
+    "key_tracks": ["Whole Lotta Love", "Highway to Hell", "Smoke on the Water", "Dream On"],
+    "spotify_track_id": "4IBBMJsXPJHbTZ5IDHcAAz",
+    "tags": ["guitar", "british", "loud", "amplified"]
+  },
+  {
+    "id": "progressive-rock",
+    "name": "Progressive Rock",
+    "parent_ids": ["rock", "classical"],
+    "origin_year": 1967,
+    "origin_decade": "1960s",
+    "region": "United Kingdom",
+    "description": [
+      "Progressive rock was a 1970s project to expand what rock music could be -- structurally, harmonically, and in terms of sheer ambition. Bands like Yes, Genesis, King Crimson, and Emerson Lake & Palmer brought classical and jazz influences into electric rock, writing songs that were 20 minutes long, used odd time signatures, and required multi-keyboard setups and elaborate stage productions.",
+      "The genre had the courage of its convictions and the excesses to match. Concept albums, elaborate cover art, and virtuosic instrumental passages reflected a genuine belief that rock could be serious art. Punk dismissed it all as pompous excess, and the genre retreated. But its technical ambition and compositional scope influenced a long line of successors, from Tool to Radiohead to a hundred prog metal bands."
+    ],
+    "key_artists": ["Yes", "Genesis", "King Crimson", "Emerson Lake & Palmer", "Rush"],
+    "key_tracks": ["Close to the Edge", "Supper's Ready", "Red", "21st Century Schizoid Man"],
+    "spotify_track_id": null,
+    "tags": ["complex", "british", "orchestral", "concept-album"]
+  },
+  {
+    "id": "psychedelic-rock",
+    "name": "Psychedelic Rock",
+    "parent_ids": ["rock", "folk"],
+    "origin_year": 1965,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Psychedelic rock emerged from the intersection of the mid-1960s counterculture and a set of studio innovations -- backwards tapes, varispeed, phasing, and unconventional arrangements -- that musicians used to translate the experience of LSD into sound. The Byrds' 12-string guitar drone, Jefferson Airplane's lysergic lyricism, and the Grateful Dead's live improvisation were all distinct approaches to the same general goal.",
+      "Jimi Hendrix and Sgt. Pepper-era Beatles pushed it further: Hendrix through pure electric intensity, the Beatles through studio experimentation that nobody had attempted in commercial music before. The movement didn't last long as a dominant form -- by 1969 it had largely given way to harder rock -- but its influence on studio practice and the idea that popular music could be a vehicle for altered states of consciousness has never really dissipated."
+    ],
+    "key_artists": ["Jimi Hendrix", "The Beatles", "The Byrds", "Jefferson Airplane", "The Grateful Dead"],
+    "key_tracks": ["Purple Haze", "Lucy in the Sky with Diamonds", "White Rabbit", "Eight Miles High"],
+    "spotify_track_id": null,
+    "tags": ["counterculture", "1960s", "experimental", "studio"]
+  },
+  {
+    "id": "reggae",
+    "name": "Reggae",
+    "parent_ids": ["ska", "rb"],
+    "origin_year": 1968,
+    "origin_decade": "1960s",
+    "region": "Jamaica",
+    "description": [
+      "Reggae developed in Jamaica in the late 1960s as ska's fast tempo slowed down and the rhythm shifted. Where ska hit on the offbeat with quick, choppy strokes, reggae stretched the offbeat into something more deliberate -- the bass became the dominant instrument, carrying the melody while the guitar played rhythmic accents called 'skanks.' The result was heavier, more hypnotic, and inextricably linked to Rastafarian religion and Jamaican social life.",
+      "Bob Marley and the Wailers brought reggae to global audiences in the early 1970s with a sound that balanced danceable grooves with explicit political and spiritual content. The music's influence has been enormous and often overlooked: reggae's bass-heavy production, its use of reverb and echo, and the dub experiments it spawned in the 1970s directly influenced punk, hip-hop, electronic music, and every genre that has taken bass seriously."
+    ],
+    "key_artists": ["Bob Marley", "Toots and the Maytals", "Jimmy Cliff", "Peter Tosh", "Burning Spear"],
+    "key_tracks": ["No Woman No Cry", "Many Rivers to Cross", "The Harder They Come", "Redemption Song"],
+    "spotify_track_id": "7iRsAKVNEbsRfJMXaEqQa6",
+    "tags": ["jamaican", "rastafari", "bass", "social"]
+  },
+  {
+    "id": "dub",
+    "name": "Dub",
+    "parent_ids": ["reggae"],
+    "origin_year": 1969,
+    "origin_decade": "1960s",
+    "region": "Jamaica",
+    "description": [
+      "Dub was accidentally invented when Jamaican sound system operators began creating instrumental versions of reggae tracks to play at dances, then started manipulating the recordings in real time: dropping out vocals, amplifying bass and drums, adding echo and reverb in unpredictable ways. King Tubby and Lee 'Scratch' Perry turned this studio practice into an art form in the early 1970s.",
+      "Dub is the first music to treat the recording studio itself as an instrument, and its influence on everything that came after is almost impossible to overstate. The idea of deconstructing an existing track, isolating individual elements, and rebuilding it through studio processing informed hip-hop production, electronic music, post-punk, and the entire concept of the remix."
+    ],
+    "key_artists": ["King Tubby", "Lee Scratch Perry", "Scientist", "Augustus Pablo", "Mad Professor"],
+    "key_tracks": ["King At the Controls", "Super Ape", "Dub from the Roots", "Original Rocketship Dub"],
+    "spotify_track_id": null,
+    "tags": ["jamaican", "studio", "bass", "remix", "experimental"]
+  },
+  {
+    "id": "folk-rock",
+    "name": "Folk Rock",
+    "parent_ids": ["folk", "rock"],
+    "origin_year": 1965,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Folk rock emerged in 1965 when Bob Dylan plugged in at the Newport Folk Festival and the Byrds electrified Pete Seeger's 'Turn! Turn! Turn!' The collision of acoustic folk's lyrical seriousness with rock and roll's energy created something that satisfied neither purist camp but resonated with a generation of listeners who wanted both.",
+      "The British folk revival added its own strand: Fairport Convention and Pentangle brought traditional English and Celtic material into electric arrangements in the late 1960s. The two scenes eventually merged and influenced each other, producing artists like Joni Mitchell, Simon and Garfunkel, and Neil Young who absorbed folk's storytelling ethic and expressed it through rock instrumentation."
+    ],
+    "key_artists": ["Bob Dylan", "The Byrds", "Simon & Garfunkel", "Neil Young", "Fairport Convention"],
+    "key_tracks": ["Mr. Tambourine Man", "The Sound of Silence", "Heart of Gold", "Suite: Judy Blue Eyes"],
+    "spotify_track_id": null,
+    "tags": ["acoustic", "lyrical", "electric", "protest"]
+  },
+  {
+    "id": "country-rock",
+    "name": "Country Rock",
+    "parent_ids": ["country", "rock"],
+    "origin_year": 1968,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Country rock developed when a set of California musicians in the late 1960s started incorporating country instrumentation and sentiment into rock arrangements. Gram Parsons was the central figure -- first with the Byrds on Sweetheart of the Rodeo, then with the Flying Burrito Brothers -- advocating for what he called 'Cosmic American Music.'",
+      "The Eagles took the template and built a hugely successful commercial version of it in the 1970s. Emmylou Harris maintained a closer connection to traditional country while absorbing the rock energy. The genre eventually fed back into country itself, influencing the more rock-oriented country radio of the 1980s, and its spirit persists in the Americana and alt-country movements."
+    ],
+    "key_artists": ["Gram Parsons", "Eagles", "Emmylou Harris", "Linda Ronstadt", "The Flying Burrito Brothers"],
+    "key_tracks": ["Hotel California", "Take It Easy", "Luxury Liner", "Sin City"],
+    "spotify_track_id": "40riOy7x9W7GXjyGp4pjAv",
+    "tags": ["american", "california", "roots", "crossover"]
+  },
+  {
+    "id": "disco",
+    "name": "Disco",
+    "parent_ids": ["funk", "soul"],
+    "origin_year": 1973,
+    "origin_decade": "1970s",
+    "region": "United States",
+    "description": [
+      "Disco emerged from the underground clubs of New York and Philadelphia in the early 1970s, built by Black, Latino, and gay communities who needed music that kept people on the floor all night. The formula was specific: four-on-the-floor kick drum, syncopated hi-hats, orchestral strings, electric bass, and a tempo fast enough to dance to but slow enough not to exhaust. Giorgio Moroder's electronic production for Donna Summer pointed toward where the music would go.",
+      "By 1977, disco had crossed over completely into mainstream pop, and the backlash was proportionate to its success. The 'Disco Sucks' moment of 1979 had an ugly undertone of racism and homophobia alongside legitimate musical exhaustion. But disco's legacy is the architecture of dance music: the DJ as cultural figure, the 12-inch single, the idea of music designed for a specific room and a specific body in motion."
+    ],
+    "key_artists": ["Donna Summer", "Gloria Gaynor", "Chic", "KC and the Sunshine Band", "Bee Gees"],
+    "key_tracks": ["I Feel Love", "I Will Survive", "Le Freak", "Stayin' Alive"],
+    "spotify_track_id": null,
+    "tags": ["dance", "club", "new-york", "liberation"]
+  },
+  {
+    "id": "punk",
+    "name": "Punk",
+    "parent_ids": ["rock", "garage-rock"],
+    "origin_year": 1974,
+    "origin_decade": "1970s",
+    "region": "United States",
+    "description": [
+      "Punk rock began in New York around 1974 in the downtown scene at CBGB, where bands like Television, Patti Smith, and the Ramones were making stripped-down, fast, and confrontational music in deliberate contrast to the over-produced arena rock dominating radio. The Ramones' first album in 1976 -- 14 songs in 29 minutes, no solos, four chords -- was the form's defining statement.",
+      "The British version arrived almost simultaneously and hit harder politically. The Sex Pistols and the Clash used punk as an attack on class structures, unemployment, and the monarchist conservatism of 1970s England. Punk's lasting contribution wasn't its sound but its ethics: the idea that anyone could pick up an instrument and say something, that the gatekeeping of commercial music could be circumvented, that anger was a legitimate subject for art."
+    ],
+    "key_artists": ["The Ramones", "Sex Pistols", "The Clash", "Patti Smith", "Television"],
+    "key_tracks": ["Blitzkrieg Bop", "God Save the Queen", "London Calling", "Anarchy in the U.K."],
+    "spotify_track_id": "3SyGJNHd9I3ICpB7oKmkjG",
+    "tags": ["fast", "political", "diy", "anti-establishment"]
+  },
+  {
+    "id": "garage-rock",
+    "name": "Garage Rock",
+    "parent_ids": ["rock"],
+    "origin_year": 1963,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Garage rock was the name given to thousands of amateur American bands in the mid-1960s who were inspired by the British Invasion but lacked the technical skill to replicate it cleanly. The result was rawer and often more interesting: basic arrangements, fuzz guitar, primitive recording, and an urgency that polish would have killed. The Kingsmen's 'Louie Louie' is the prototype -- barely coherent, absolutely irresistible.",
+      "The genre's influence extended far beyond its moment. The Stooges and MC5 in Detroit at the end of the 1960s took the rawness and aggression further, creating a pre-punk sound that Iggy Pop and countless others drew on. The early 2000s garage rock revival -- the White Stripes, the Strokes, the Hives -- found a new generation treating deliberate lo-fi rawness as an aesthetic value."
+    ],
+    "key_artists": ["The Kingsmen", "The Sonics", "The Stooges", "MC5", "The Troggs"],
+    "key_tracks": ["Louie Louie", "Psycho", "Search and Destroy", "Wild Thing"],
+    "spotify_track_id": null,
+    "tags": ["amateur", "raw", "electric", "60s"]
+  },
+  {
+    "id": "metal",
+    "name": "Heavy Metal",
+    "parent_ids": ["hard-rock", "blues"],
+    "origin_year": 1969,
+    "origin_decade": "1960s",
+    "region": "United Kingdom",
+    "description": [
+      "Heavy metal coalesced around a handful of British bands at the end of the 1960s -- Black Sabbath most definitively, with their down-tuned, doom-laden riffs and Tony Iommi's distinctive guitar tone. Sabbath took the amplifier worship of hard rock and slowed it down, added the tritone interval that medieval musicians called 'the devil's interval,' and made music that felt genuinely threatening.",
+      "Metal's history is a series of splinterings, each subgenre defining itself against what came before. The 1980s New Wave of British Heavy Metal produced Maiden and Judas Priest. Thrash metal in America went faster and angrier. Death metal stripped out melody. Black metal pursued extremity for its own sake. Despite every mutation, the electric guitar played loud and distorted remains the fixed center."
+    ],
+    "key_artists": ["Black Sabbath", "Iron Maiden", "Judas Priest", "Ozzy Osbourne", "Motorhead"],
+    "key_tracks": ["Iron Man", "Paranoid", "The Number of the Beast", "Running Wild"],
+    "spotify_track_id": null,
+    "tags": ["loud", "british", "guitar", "heavy"]
+  },
+  {
+    "id": "hip-hop",
+    "name": "Hip-Hop",
+    "parent_ids": ["funk", "soul", "rb"],
+    "origin_year": 1973,
+    "origin_decade": "1970s",
+    "region": "United States",
+    "description": [
+      "Hip-hop began in the South Bronx in 1973 when DJ Kool Herc figured out that he could extend the 'break' -- the percussion-only section of a funk or soul record -- by switching between two copies of the same record on turntables. That technical innovation, combined with MCs who talked over it, b-boys who danced to it, and graffiti writers who decorated the spaces around it, created a cultural form that would eventually become the dominant popular music of the world.",
+      "What makes hip-hop's expansion remarkable is how little the core has changed while the surface has transformed completely. The relationship between producer and MC, between sample and lyric, between neighborhood specificity and universal feeling -- these tensions were present at the beginning and remain central today. From Rakim's formal complexity to Jay-Z's commercial mastery to Kendrick Lamar's literary ambition, the arc is continuous."
+    ],
+    "key_artists": ["DJ Kool Herc", "Grandmaster Flash", "Public Enemy", "Nas", "Jay-Z"],
+    "key_tracks": ["The Message", "Fight the Power", "N.Y. State of Mind", "HUMBLE."],
+    "spotify_track_id": "5Z01UMMf7V1o0MoF5PkjUG",
+    "tags": ["black-american", "bronx", "sampling", "urban"]
+  },
+  {
+    "id": "ambient",
+    "name": "Ambient",
+    "parent_ids": ["electronic", "classical"],
+    "origin_year": 1978,
+    "origin_decade": "1970s",
+    "region": "United Kingdom",
+    "description": [
+      "Brian Eno coined the term 'ambient music' in 1978 after an accidental experiment: a record played too quietly in a room full of traffic noise revealed that music could function as an environmental feature rather than a foreground event. Ambient: Music for Airports was the first attempt to formalize this -- slow, static, harmonic music designed to be both heard and ignored.",
+      "The genre expanded significantly in the 1980s and 1990s through Eno's own work, through artists like Harold Budd and William Basinski, and through the ambient techno and IDM scenes that emerged from rave culture. Today, ambient is the fastest-growing streaming category -- background music for remote work, focus, and sleep -- which would have puzzled its originators, who thought of it as a serious compositional practice."
+    ],
+    "key_artists": ["Brian Eno", "Harold Budd", "William Basinski", "Stars of the Lid", "Tim Hecker"],
+    "key_tracks": ["Discreet Music", "An Ending (Ascent)", "The Disintegration Loops", "On Land"],
+    "spotify_track_id": null,
+    "tags": ["atmospheric", "british", "background", "minimalist"]
+  },
+  {
+    "id": "post-punk",
+    "name": "Post-Punk",
+    "parent_ids": ["punk"],
+    "origin_year": 1977,
+    "origin_decade": "1970s",
+    "region": "United Kingdom",
+    "description": [
+      "Post-punk was what happened when musicians who had absorbed punk's energy and DIY ethics decided to use them as a starting point rather than an endpoint. Beginning around 1977, bands like Joy Division, Gang of Four, Wire, and The Fall applied punk's stripped-down approach to more complex musical ideas -- funk rhythms, Krautrock's repetition, dub's use of space and echo, art rock's conceptual ambition.",
+      "The mood was mostly dark: post-punk processed urban anxiety, political disillusionment, and a kind of cold introspection that stood apart from punk's aggressive outward energy. Joy Division's music, with its cavernous production and Ian Curtis's increasingly fragmented vocals, became the most enduring artifact. The genre's influence showed up again strongly in the early 2000s -- Interpol, Editors, Bloc Party -- and continues to shape guitar-based music."
+    ],
+    "key_artists": ["Joy Division", "Gang of Four", "Wire", "The Fall", "Public Image Ltd."],
+    "key_tracks": ["Love Will Tear Us Apart", "Damaged Goods", "Outdoor Miner", "Public Image"],
+    "spotify_track_id": null,
+    "tags": ["british", "dark", "intellectual", "art-rock"]
+  },
+  {
+    "id": "new-wave",
+    "name": "New Wave",
+    "parent_ids": ["punk", "electronic"],
+    "origin_year": 1977,
+    "origin_decade": "1970s",
+    "region": "United Kingdom",
+    "description": [
+      "New wave emerged from the same moment as post-punk but pointed in a different direction: toward pop accessibility, visual style, and the integration of synthesizers into rock arrangements. Where post-punk was austere, new wave was theatrical and often playful. The Talking Heads, Devo, and Elvis Costello shared the same CBGB lineage as punk but were clearly interested in different things.",
+      "MTV's launch in 1981 accelerated new wave's commercial moment. Bands whose music came packaged with striking visuals -- Duran Duran, The Police, Blondie -- suddenly had a new promotional channel that radio couldn't offer. The genre's legacy is the normalization of synthesizers in mainstream rock and pop, and the emphasis on image and style as integral parts of a band's identity."
+    ],
+    "key_artists": ["Talking Heads", "Blondie", "Devo", "Elvis Costello", "The Cars"],
+    "key_tracks": ["Once in a Lifetime", "Heart of Glass", "Whip It", "Just What I Needed"],
+    "spotify_track_id": null,
+    "tags": ["british", "synthesizer", "visual", "pop-crossover"]
+  },
+  {
+    "id": "synth-pop",
+    "name": "Synth-Pop",
+    "parent_ids": ["new-wave", "electronic"],
+    "origin_year": 1979,
+    "origin_decade": "1980s",
+    "region": "United Kingdom",
+    "description": [
+      "Synth-pop committed fully to the synthesizer as the primary instrument, replacing guitar and drums with machines entirely or nearly so. British bands in the late 1970s and early 1980s -- Depeche Mode, Soft Cell, Human League, Gary Numan -- found that synthesizers weren't just a supplement to rock but a replacement for it, capable of generating their own emotional language.",
+      "The Human League's Dare in 1981, produced by Martin Rushent, is the genre's defining document: hooks as sharp as any pop record, textures that were unmistakably machine-made, and an emotional directness that proved synthetic instruments could carry genuine feeling. The genre influenced every strand of electronic pop that followed, from 1990s dance-pop to the current vaporwave and darksynth subcultures."
+    ],
+    "key_artists": ["Depeche Mode", "Human League", "Soft Cell", "Gary Numan", "Erasure"],
+    "key_tracks": ["Personal Jesus", "Don't You Want Me", "Tainted Love", "Cars"],
+    "spotify_track_id": null,
+    "tags": ["british", "synthesizer", "pop", "machines"]
+  },
+  {
+    "id": "house",
+    "name": "House",
+    "parent_ids": ["disco", "electronic"],
+    "origin_year": 1982,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "House music was invented in Chicago around 1982 by a small community of DJs and producers working at the Warehouse and Music Box clubs. Frankie Knuckles, Larry Heard, and Larry Levan took the remnants of disco -- four-on-the-floor kick drums, piano chords, diva vocals -- and stripped them down, rebuilt them with drum machines and early synthesizers, and played them in spaces that were predominantly Black and gay.",
+      "The music spread from Chicago to New York, then to the UK, where it hit the underground club scene around 1986-87 and ignited the acid house phenomenon. Ecstasy, warehouse parties, and 303 basslines created a culture around the music that the music itself generated. House is now the default architecture of global club music, so thoroughly absorbed that it has become invisible -- the water that dance music swims in."
+    ],
+    "key_artists": ["Frankie Knuckles", "Larry Heard", "Larry Levan", "Jamie Principle", "Robert Owens"],
+    "key_tracks": ["Your Love", "Can You Feel It", "Washing Machine", "Promised Land"],
+    "spotify_track_id": null,
+    "tags": ["chicago", "dance", "club", "black-queer"]
+  },
+  {
+    "id": "techno",
+    "name": "Techno",
+    "parent_ids": ["electronic", "house"],
+    "origin_year": 1985,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Techno originated in Detroit in the mid-1980s, created by a small group of Black musicians -- Juan Atkins, Derrick May, and Kevin Saunderson, known as the Belleville Three -- who synthesized Kraftwerk's machine aesthetics with Chicago house's structure and added a science-fiction sensibility that reflected Detroit's post-industrial landscape. The music was faster, colder, and more abstract than house.",
+      "Derrick May described techno as George Clinton and Kraftwerk stuck in an elevator. The music found its largest audience in Europe, particularly Germany, where the reunification of Berlin in 1989 created a context for it: abandoned warehouses, a city rebuilding itself, a generation wanting to dance in the ruins. Berlin remains the global capital of techno culture, centered on clubs like Berghain that have turned the music into a near-religious institution."
+    ],
+    "key_artists": ["Juan Atkins", "Derrick May", "Kevin Saunderson", "Carl Craig", "Robert Hood"],
+    "key_tracks": ["No UFOs", "Strings of Life", "Good Life", "Minimal Nation"],
+    "spotify_track_id": null,
+    "tags": ["detroit", "machine", "club", "futurist"]
+  },
+  {
+    "id": "indie",
+    "name": "Indie Rock",
+    "parent_ids": ["punk", "rock"],
+    "origin_year": 1980,
+    "origin_decade": "1980s",
+    "region": "United Kingdom",
+    "description": [
+      "Indie rock originally described music released on independent labels rather than a sonic category. In the UK in the early 1980s, a network of small labels -- Rough Trade, Factory, 4AD, Creation -- released music that was too strange or uncommercial for major label investment. The Smiths, The Jesus and Mary Chain, and the Cure defined an aesthetic: jangly or noisy guitars, melancholic lyrics, a deliberate distance from mainstream polish.",
+      "The label migrated to America in the 1990s, describing a scene that included Pavement, Guided by Voices, and Superchunk -- bands who made music on tiny budgets for dedicated cult audiences. By the early 2000s, Indie had become a major label marketing category, which both expanded its reach and diluted its meaning. The tension between independence as a business model and independence as an aesthetic continues."
+    ],
+    "key_artists": ["The Smiths", "Pavement", "Sonic Youth", "Pixies", "R.E.M."],
+    "key_tracks": ["This Charming Man", "Smells Like Teen Spirit", "Where Is My Mind?", "Losing My Religion"],
+    "spotify_track_id": null,
+    "tags": ["independent", "british-american", "guitar", "underground"]
+  },
+  {
+    "id": "alternative",
+    "name": "Alternative Rock",
+    "parent_ids": ["punk", "indie"],
+    "origin_year": 1982,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Alternative rock started as a radio format descriptor in the 1980s for music that didn't fit mainstream rock or pop categories -- too strange, too loud, too arty, or too political. The Replacements, Husker Du, and R.E.M. were all 'alternative' in the original sense: genuinely alternative to what was on the radio, though commercially limited.",
+      "Nirvana's Nevermind in 1991 changed all of that overnight. Alternative rock became the dominant radio format, and labels scrambled to sign anything that sounded vaguely grunge-adjacent. The format spent the rest of the 1990s trying to contain the contradiction: music defined by opposition to the mainstream had become the mainstream. Radiohead, Smashing Pumpkins, and Beck navigated that contradiction most interestingly."
+    ],
+    "key_artists": ["R.E.M.", "Sonic Youth", "Pixies", "Smashing Pumpkins", "Radiohead"],
+    "key_tracks": ["Losing My Religion", "Daydream Nation", "Debaser", "Bullet with Butterfly Wings"],
+    "spotify_track_id": "70LcF31zb1H0PyJoS1Sx1r",
+    "tags": ["alternative", "guitar", "american", "college-radio"]
+  },
+  {
+    "id": "dream-pop",
+    "name": "Dream Pop",
+    "parent_ids": ["indie", "ambient"],
+    "origin_year": 1982,
+    "origin_decade": "1980s",
+    "region": "United Kingdom",
+    "description": [
+      "Dream pop emerged from the UK indie scene in the early 1980s, combining the guitar textures and melodic sensibility of indie rock with ambient music's interest in atmosphere over forward motion. Cocteau Twins and This Mortal Coil on the 4AD label established the aesthetic: heavily processed guitars, reverb-drenched vocals, and lyrics that prioritized sound over literal meaning.",
+      "The genre has proved remarkably durable. Beach House became its most successful contemporary practitioners, using a similar combination of hazy production and strong melodic instincts to reach audiences that 4AD bands never could. The aesthetic has fed into shoegaze, chillwave, and the vaporwave underground, wherever musicians are interested in texture as the primary compositional tool."
+    ],
+    "key_artists": ["Cocteau Twins", "This Mortal Coil", "Beach House", "Mazzy Star", "Slowdive"],
+    "key_tracks": ["Heaven or Las Vegas", "Song to the Siren", "Space Song", "Fade Into You"],
+    "spotify_track_id": null,
+    "tags": ["atmospheric", "british", "reverb", "melodic"]
+  },
+  {
+    "id": "shoegaze",
+    "name": "Shoegaze",
+    "parent_ids": ["indie", "dream-pop"],
+    "origin_year": 1988,
+    "origin_decade": "1980s",
+    "region": "United Kingdom",
+    "description": [
+      "Shoegaze got its name from critics who noted that the bands played with their heads down, staring at the effects pedals at their feet. My Bloody Valentine, Ride, Lush, and Chapterhouse created a sound in the late 1980s and early 1990s that buried vocal melodies under walls of distorted guitar -- not noise for its own sake but noise as texture, as weather.",
+      "My Bloody Valentine's Loveless in 1991 remains the definitive document, a record that took three years and nearly bankrupted Creation Records to make and that no subsequent shoegaze band has quite matched in ambition or strangeness. The genre faded commercially but influenced an enormous range of music -- from the dense production of Slowdive's recent records to the guitar textures in a thousand indie and alternative releases."
+    ],
+    "key_artists": ["My Bloody Valentine", "Slowdive", "Ride", "Lush", "Chapterhouse"],
+    "key_tracks": ["Only Shallow", "When the Sun Hits", "Leave Them All Behind", "Sweetness and Light"],
+    "spotify_track_id": null,
+    "tags": ["british", "guitar-wall", "effects", "reverb"]
+  },
+  {
+    "id": "emo",
+    "name": "Emo",
+    "parent_ids": ["punk", "indie"],
+    "origin_year": 1984,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Emo -- short for emotional hardcore -- began in Washington D.C. in the mid-1980s as a subset of the hardcore punk scene that prioritized personal expression over political content. Rites of Spring and Embrace, both connected to Ian MacKaye's Dischord Records network, wrote melodic, confessional music that felt like a departure from the macho aggression of mainstream hardcore.",
+      "The genre's commercial moment came in the early 2000s when major labels signed bands like Dashboard Confessional, Jimmy Eat World, and Taking Back Sunday to a version of the sound that was more melodic, more radio-friendly, and eventually incorporated screaming vocals through post-hardcore. My Chemical Romance brought it to its widest audience. The word 'emo' lost its specificity and became a catch-all term for melodramatic teen music, obscuring the genuine originality of the originals."
+    ],
+    "key_artists": ["Rites of Spring", "Sunny Day Real Estate", "Jimmy Eat World", "Dashboard Confessional", "My Chemical Romance"],
+    "key_tracks": ["For Want Of", "Seven", "The Middle", "Hands Down", "Welcome to the Black Parade"],
+    "spotify_track_id": null,
+    "tags": ["confessional", "american", "melodic", "youth"]
+  },
+  {
+    "id": "grunge",
+    "name": "Grunge",
+    "parent_ids": ["punk", "metal", "indie"],
+    "origin_year": 1987,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Grunge emerged from Seattle's small music scene in the late 1980s, blending the heavy distortion of metal with the aggression of punk and the melodic sensibility of indie rock. Mudhoney, Soundgarden, and Alice in Chains were playing this music for small audiences on Sub Pop Records before Nirvana's Nevermind made it unavoidable in 1991.",
+      "Nevermind's commercial detonation was simultaneously grunge's greatest moment and the beginning of its end. Nirvana's success brought major-label resources and mass attention to a scene that had been defined by its marginality. Kurt Cobain's discomfort with that contradiction was genuine and well-documented. When he died in 1994, the scene dispersed -- some into Pearl Jam's arena rock, some into post-grunge's softer version, some into experimental noise."
+    ],
+    "key_artists": ["Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains", "Mudhoney"],
+    "key_tracks": ["Smells Like Teen Spirit", "Black", "Black Hole Sun", "Rooster"],
+    "spotify_track_id": "5ghIJDpPoe3CfHMGu71E6T",
+    "tags": ["seattle", "heavy", "distorted", "1990s"]
+  },
+  {
+    "id": "thrash-metal",
+    "name": "Thrash Metal",
+    "parent_ids": ["metal", "punk"],
+    "origin_year": 1981,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Thrash metal took heavy metal's guitar riffs and punk's speed and aggression and combined them into something more technically demanding than either parent. The Bay Area scene -- Metallica, Slayer, Exodus, Megadeth -- defined the sound in the early 1980s: down-tuned guitars playing complex, fast riffs over blast beats, with vocals that leaned toward barked aggression rather than operatic melody.",
+      "Metallica's Master of Puppets in 1986 is the genre's summit: intricate arrangements, genuinely heavy riffing, and structural ambition that distinguished it from simpler metal. Slayer went in the opposite direction, pursuing pure speed and brutality on Reign in Blood the same year. Both approaches influenced the death metal and black metal scenes that followed."
+    ],
+    "key_artists": ["Metallica", "Slayer", "Megadeth", "Anthrax", "Exodus"],
+    "key_tracks": ["Master of Puppets", "Reign in Blood", "Peace Sells", "Raining Blood"],
+    "spotify_track_id": null,
+    "tags": ["fast", "heavy", "bay-area", "riffing"]
+  },
+  {
+    "id": "death-metal",
+    "name": "Death Metal",
+    "parent_ids": ["metal", "thrash-metal"],
+    "origin_year": 1984,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Death metal pushed thrash metal's extremity further in every dimension: faster tempos, lower guitar tunings, more technical playing, and vocals that were deliberately unintelligible -- a guttural growl or scream that prioritized texture over articulation. Chuck Schuldiner's band Death, Possessed, and the early Morbid Angel recordings established the vocabulary in Florida in the mid-1980s.",
+      "The genre has sustained a dedicated following for four decades through constant subdivision: melodic death metal, technical death metal, brutal death metal, death-doom. Bands like Opeth and Cannibal Corpse represent opposite ends of the spectrum -- one toward progressive complexity and dynamics, one toward pure brutality. Death metal has never crossed over commercially and seems uninterested in doing so."
+    ],
+    "key_artists": ["Death", "Morbid Angel", "Cannibal Corpse", "Obituary", "Suffocation"],
+    "key_tracks": ["Crystal Mountain", "Altars of Madness", "Hammer Smashed Face", "Slowly We Rot"],
+    "spotify_track_id": null,
+    "tags": ["extreme", "florida", "brutal", "technical"]
+  },
+  {
+    "id": "black-metal",
+    "name": "Black Metal",
+    "parent_ids": ["metal", "thrash-metal"],
+    "origin_year": 1982,
+    "origin_decade": "1980s",
+    "region": "Norway",
+    "description": [
+      "Black metal originated in the UK with Venom and Mercyful Fate in the early 1980s, but the genre's second wave in early 1990s Norway gave it its definitive sound and controversy. Mayhem, Burzum, Darkthrone, and Emperor created music built on deliberately primitive, cold production -- blast beats, tremolo-picked guitars, shrieks -- and an ideology of anti-Christianity, paganism, and extreme individualism.",
+      "The Norwegian scene's real-world violence -- church burnings, murders within the scene -- became inseparable from its mythology. Musically, post-1990s black metal has developed into something more diverse: atmospheric black metal from Wolves in the Throne Room, the depressive DSBM subgenre, and the experimental approaches of bands like Deafheaven that incorporate post-rock and shoegaze elements into the template."
+    ],
+    "key_artists": ["Mayhem", "Burzum", "Darkthrone", "Emperor", "Bathory"],
+    "key_tracks": ["De Mysteriis Dom Sathanas", "In the Nightside Eclipse", "Transylvanian Hunger", "Blood Fire Death"],
+    "spotify_track_id": null,
+    "tags": ["norwegian", "extreme", "cold", "atmospheric"]
+  },
+  {
+    "id": "nu-metal",
+    "name": "Nu-Metal",
+    "parent_ids": ["metal", "hip-hop"],
+    "origin_year": 1993,
+    "origin_decade": "1990s",
+    "region": "United States",
+    "description": [
+      "Nu-metal emerged in the mid-1990s from the collision of heavy metal's guitar distortion with hip-hop's rhythmic approach and turntable techniques. Bands like Korn, Limp Bizkit, and Deftones dropped guitar tunings dramatically, incorporated rapping and DJing, and wrote about suburban alienation and adolescent rage in ways that connected with a generation of American teenagers.",
+      "The genre peaked commercially around 1999-2001 and collapsed almost as fast, partly due to critical backlash and partly because its sonic approach aged quickly. Deftones outlasted the trend by developing a more nuanced sound. Linkin Park found a more pop-accessible version of the formula. The genre's legacy is complicated -- dismissed at the time, it has experienced genuine critical reassessment, particularly Korn's early records."
+    ],
+    "key_artists": ["Korn", "Deftones", "Limp Bizkit", "Linkin Park", "System of a Down"],
+    "key_tracks": ["Blind", "My Own Summer", "Rollin'", "In the End", "Chop Suey!"],
+    "spotify_track_id": null,
+    "tags": ["american", "crossover", "heavy", "1990s"]
+  },
+  {
+    "id": "trance",
+    "name": "Trance",
+    "parent_ids": ["techno", "electronic"],
+    "origin_year": 1991,
+    "origin_decade": "1990s",
+    "region": "Germany",
+    "description": [
+      "Trance developed in Frankfurt and other German cities in the early 1990s as a more melodic, emotionally direct version of techno. Where techno was cold and abstract, trance worked with chord progressions and melody lines, building through long builds and drops toward euphoric releases. The music was engineered for emotional impact in ways that purist techno deliberately avoided.",
+      "The genre diversified across the 1990s into progressive trance, psytrance, and Goa trance -- the last connecting the music to the outdoor festival culture of the Goa coast in India. Armin van Buuren and Tiesto brought uplifting trance to enormous global audiences in the 2000s through radio shows and arena tours. The genre's influence persists in the build-drop structure that characterizes contemporary EDM."
+    ],
+    "key_artists": ["Armin van Buuren", "Tiesto", "Paul van Dyk", "ATB", "Ferry Corsten"],
+    "key_tracks": ["Sailing", "Traffic", "9 PM (Till I Come)", "In My Memory"],
+    "spotify_track_id": null,
+    "tags": ["german", "euphoric", "melodic", "dance"]
+  },
+  {
+    "id": "drum-and-bass",
+    "name": "Drum and Bass",
+    "parent_ids": ["electronic", "jungle"],
+    "origin_year": 1993,
+    "origin_decade": "1990s",
+    "region": "United Kingdom",
+    "description": [
+      "Drum and bass grew out of the UK jungle scene in the early 1990s, taking the breakbeat rhythms and reggae basslines of jungle and accelerating the drums to 160-180 BPM while the bass moved in slower, heavier patterns underneath. The split between rhythm and bass created a distinctive tension: the listener's body had to respond to two different tempos simultaneously.",
+      "The genre had a brief mainstream moment in 1995-96 -- Goldie's Timeless, Roni Size's New Forms winning the Mercury Prize -- before retreating to a dedicated underground. Liquid DnB, neurofunk, jump-up, and dark DnB represent the main lines of subsequent development. The music has remained a fixture of UK underground club culture and has periodically influenced mainstream pop production."
+    ],
+    "key_artists": ["Goldie", "LTJ Bukem", "Roni Size", "Andy C", "DJ Fresh"],
+    "key_tracks": ["Inner City Life", "Music", "Brown Paper Bag", "Gold"],
+    "spotify_track_id": null,
+    "tags": ["british", "fast", "breakbeat", "bass"]
+  },
+  {
+    "id": "jungle",
+    "name": "Jungle",
+    "parent_ids": ["electronic", "reggae"],
+    "origin_year": 1991,
+    "origin_decade": "1990s",
+    "region": "United Kingdom",
+    "description": [
+      "Jungle music emerged from the UK rave scene in the early 1990s, primarily from Black British communities in London who brought a reggae and soundsystem sensibility to the breakbeat techno coming from the pirate radio stations. The sound was chaotic and dense: hyperfast breakbeats chopped and repitched from hip-hop and soul records, massive reggae basslines, and MCs toasting over the top.",
+      "Jungle was one of the first genuinely urban British musics -- not derived from American or Jamaican sources but synthesizing them in the specific context of London housing estates and pirate radio. It formalized into drum and bass by the mid-1990s but retained jungle's frenetic energy in the sub-genre of jump-up. The genre's cultural politics -- its expression of Black British identity -- were as significant as its sound."
+    ],
+    "key_artists": ["Shy FX", "Ray Keith", "Congo Natty", "The Prodigy", "4Hero"],
+    "key_tracks": ["Original Nuttah", "Terrorist", "Rebel Music", "Mr. Kirk's Nightmare"],
+    "spotify_track_id": null,
+    "tags": ["british", "breakbeat", "urban", "black-british"]
+  },
+  {
+    "id": "trip-hop",
+    "name": "Trip-Hop",
+    "parent_ids": ["hip-hop", "electronic", "jazz"],
+    "origin_year": 1991,
+    "origin_decade": "1990s",
+    "region": "United Kingdom",
+    "description": [
+      "Trip-hop emerged from Bristol in the early 1990s as a slower, more introspective relative of hip-hop, built on dusty sample loops, minor key melodies, and a mood somewhere between melancholy and menace. Massive Attack's Blue Lines in 1991 established the template: hip-hop's sampling approach applied to an aesthetic built from jazz records, film music, and reggae.",
+      "Portishead and Tricky developed distinct variations on the same Bristol foundation, and the label 'Portishead' became almost inseparable from the genre for international audiences. The music found significant crossover success in the mid-1990s as mood music for people who found house too physical and classical too distant. Beth Gibbons' vocals on Portishead's first two records remain one of the most distinctive performances of the decade."
+    ],
+    "key_artists": ["Massive Attack", "Portishead", "Tricky", "Bjork", "Morcheeba"],
+    "key_tracks": ["Unfinished Sympathy", "Glory Box", "Aftermath", "Human Behaviour"],
+    "spotify_track_id": null,
+    "tags": ["bristol", "melancholic", "cinematic", "sampled"]
+  },
+  {
+    "id": "indie-pop",
+    "name": "Indie Pop",
+    "parent_ids": ["indie", "pop"],
+    "origin_year": 1984,
+    "origin_decade": "1980s",
+    "region": "United Kingdom",
+    "description": [
+      "Indie pop separated from the darker currents of post-punk and indie rock in the mid-1980s, choosing melodic hooks, jangling guitars, and an innocent or wistful emotional register over darkness and aggression. The Scottish label Postcard Records and the NME's C86 cassette compilation documented a sound that was deliberately sweet and uncommercial.",
+      "The genre found a large audience through Belle and Sebastian in the late 1990s and reinvented itself repeatedly through the 2000s in the music of Of Montreal, Camera Obscura, and Vampire Weekend. Indie pop's defining tension is between the sweetness of its sound and the intelligence of its lyrics -- it often deploys elaborate verbal constructions over the simplest possible musical arrangements."
+    ],
+    "key_artists": ["Belle and Sebastian", "The Field Mice", "Talulah Gosh", "Camera Obscura", "Vampire Weekend"],
+    "key_tracks": ["If You're Feeling Sinister", "Lazy Line Painter Jane", "Oxford Comma", "Lets Get Out of This Country"],
+    "spotify_track_id": null,
+    "tags": ["british", "melodic", "sweet", "underground"]
+  },
+  {
+    "id": "post-rock",
+    "name": "Post-Rock",
+    "parent_ids": ["rock", "ambient"],
+    "origin_year": 1991,
+    "origin_decade": "1990s",
+    "region": "United Kingdom",
+    "description": [
+      "Post-rock used rock instrumentation -- guitars, bass, drums -- to pursue the goals of classical or ambient music rather than rock music. Bands like Talk Talk, Bark Psychosis, Tortoise, and Slint abandoned verse-chorus structures and vocals to build long, slowly developing pieces that moved through extended periods of quiet tension toward massive, cathartic eruptions.",
+      "Mogwai and Godspeed You! Black Emperor became the genre's most celebrated practitioners, the latter adding political urgency to instrumental rock's emotional dynamics. The genre overlaps significantly with math rock's rhythmic complexity and with ambient music's interest in texture. It has influenced film scoring significantly -- the dramatic arc of a post-rock track maps naturally onto soundtrack work."
+    ],
+    "key_artists": ["Godspeed You! Black Emperor", "Mogwai", "Explosions in the Sky", "Slint", "Tortoise"],
+    "key_tracks": ["Sleep", "Like Herod", "Your Hand in Mine", "Spiderland"],
+    "spotify_track_id": null,
+    "tags": ["instrumental", "cinematic", "build", "orchestral"]
+  },
+  {
+    "id": "k-pop",
+    "name": "K-Pop",
+    "parent_ids": ["pop", "rb", "electronic"],
+    "origin_year": 1992,
+    "origin_decade": "1990s",
+    "region": "South Korea",
+    "description": [
+      "K-pop emerged as a distinct industry in South Korea in the early 1990s when companies like SM Entertainment developed a vertically integrated system for producing pop stars: recruit trainees, train them for years in singing, dancing, and language skills, then debut them as meticulously coordinated groups. Seo Taiji and Boys in 1992 introduced hip-hop and R&B influences into Korean pop, and the genre has absorbed Western musical trends ever since.",
+      "BTS's global breakthrough around 2017-2018 brought K-pop to audiences that had never engaged with Korean music, driven partly by fandom infrastructure that mobilized listeners in organized ways that Western artists hadn't encountered before. The genre is defined as much by its industrial methods -- the idol system, fan engagement culture, choreography -- as by any musical characteristic."
+    ],
+    "key_artists": ["BTS", "BLACKPINK", "EXO", "Girls' Generation", "SHINee"],
+    "key_tracks": ["Dynamite", "How You Like That", "MONSTER", "Gee"],
+    "spotify_track_id": null,
+    "tags": ["korean", "idol", "global", "choreography"]
+  },
+  {
+    "id": "dubstep",
+    "name": "Dubstep",
+    "parent_ids": ["drum-and-bass", "electronic"],
+    "origin_year": 2000,
+    "origin_decade": "2000s",
+    "region": "United Kingdom",
+    "description": [
+      "Dubstep originated in south London around 2001, taking its name from its relationship to dub reggae and its tempo from two-step garage. Early dubstep was dark and sparse -- heavy bass wobbles, lots of empty space, half-time rhythms, and a mood influenced by the dub records that UK sound system culture had never fully abandoned. Skream, Benga, and Digital Mystikz defined the original sound.",
+      "The genre bifurcated dramatically around 2010. The American brostep version -- Skrillex's aggressive, maximalist drops -- became globally popular and commercially enormous. The UK underground reacted by going further in the opposite direction, doubling down on darkness, sparseness, and bass weight. Both share a name but have almost nothing in common sonically or culturally."
+    ],
+    "key_artists": ["Skream", "Benga", "Digital Mystikz", "Skrillex", "Burial"],
+    "key_tracks": ["Midnight Request Line", "Shangaan", "Untrue", "Scary Monsters and Nice Sprites"],
+    "spotify_track_id": null,
+    "tags": ["british", "bass", "half-time", "south-london"]
+  },
+  {
+    "id": "grime",
+    "name": "Grime",
+    "parent_ids": ["hip-hop", "electronic"],
+    "origin_year": 2002,
+    "origin_decade": "2000s",
+    "region": "United Kingdom",
+    "description": [
+      "Grime emerged from east London around 2002, created by young Black British musicians who found hip-hop's American cultural references too distant and garage music too focused on women and romance. The music was faster -- 140 BPM, the same tempo as UK garage -- but darker and more abrasive, with production that incorporated sirens, rave stabs, and electronic noise over an aggressive, rapid-fire MC style.",
+      "Dizzee Rascal's Boy in da Corner in 2003 was the first grime album to reach a wide audience and won the Mercury Prize that year. The scene remained mostly underground for a decade before Skepta, JME, and Stormzy brought it back to national prominence around 2015-16. Grime is one of the most distinctly British popular music forms of the 21st century, rooted in the specific experience of young Black men in London."
+    ],
+    "key_artists": ["Dizzee Rascal", "Skepta", "Stormzy", "JME", "Wiley"],
+    "key_tracks": ["Bonkers", "Shutdown", "Blinded by Your Grace", "Ting Goes Skraa"],
+    "spotify_track_id": null,
+    "tags": ["british", "london", "urban", "mc"]
+  },
+  {
+    "id": "trap",
+    "name": "Trap",
+    "parent_ids": ["hip-hop"],
+    "origin_year": 2003,
+    "origin_decade": "2000s",
+    "region": "United States",
+    "description": [
+      "Trap music came from Atlanta in the early 2000s, taking its name from the trap house -- the location where drug deals happen -- and its sound from 808 bass drums, hi-hat triplets, and synthesizer melodies. T.I., Gucci Mane, and Young Jeezy developed the sound; Lex Luger and Zaytoven were its most influential producers in the genre's defining period.",
+      "Trap became the dominant sound of hip-hop by the early 2010s, and its production aesthetic -- the 808, the rapid hi-hat rolls, the dark melodic samples -- spread into pop, R&B, and electronic music globally. Artists like Future, Young Thug, and Migos developed the vocal style: an autotune-heavy melodic rap that blurred the line between singing and rapping in ways that have permanently changed how hip-hop vocals work."
+    ],
+    "key_artists": ["T.I.", "Gucci Mane", "Young Jeezy", "Future", "Young Thug"],
+    "key_tracks": ["What You Know", "Lemonade", "Same Damn Time", "March Madness"],
+    "spotify_track_id": null,
+    "tags": ["atlanta", "808", "hip-hop", "southern"]
+  },
+  {
+    "id": "afrobeats",
+    "name": "Afrobeats",
+    "parent_ids": ["funk", "reggae", "hip-hop"],
+    "origin_year": 2000,
+    "origin_decade": "2000s",
+    "region": "Nigeria",
+    "description": [
+      "Afrobeats -- distinct from Fela Kuti's Afrobeat of the 1970s -- emerged from Lagos and Accra in the early 2000s, blending traditional West African rhythms, highlife, American R&B and hip-hop, and dancehall into a sound optimized for clubs from Lagos to London. Artists like D'banj, P-Square, and 2face Idibia built the scene; Davido, Wizkid, and Burna Boy brought it to global audiences.",
+      "Wizkid's collaboration with Drake on 'One Dance' in 2016 was the pivot point -- the sound went from diaspora favorite to mainstream global pop. Burna Boy's Grammy win in 2021 confirmed the genre's international standing. Afrobeats represents the first sub-Saharan African popular music to achieve genuine global commercial dominance, and it has influenced the sound of Western pop in ways that are only beginning to be absorbed."
+    ],
+    "key_artists": ["Burna Boy", "Wizkid", "Davido", "Fela Kuti", "Tiwa Savage"],
+    "key_tracks": ["Fall", "One Dance", "Ye", "Essence"],
+    "spotify_track_id": null,
+    "tags": ["nigerian", "west-african", "global", "dance"]
+  },
+  {
+    "id": "reggaeton",
+    "name": "Reggaeton",
+    "parent_ids": ["reggae", "hip-hop"],
+    "origin_year": 1991,
+    "origin_decade": "1990s",
+    "region": "Puerto Rico",
+    "description": [
+      "Reggaeton developed in Panama and Puerto Rico in the early 1990s from the collision of Jamaican dancehall, American hip-hop, and Puerto Rican and Caribbean musical traditions. The dembow rhythm -- a specific syncopated pattern on the drum machine -- became the genre's rhythmic signature, instantly recognizable and endlessly varied. DJ Playero's underground mixtapes circulated the sound through Latin America before it reached mainstream radio.",
+      "Daddy Yankee's 'Gasolina' in 2004 was the commercial breakthrough that introduced reggaeton to North American audiences. The genre's biggest global moment came in 2017 when 'Despacito' by Luis Fonsi and Daddy Yankee broke streaming records worldwide. J Balvin, Bad Bunny, and Maluma have built massive careers on the genre's global appetite. Reggaeton's influence on Latin pop has been total."
+    ],
+    "key_artists": ["Daddy Yankee", "J Balvin", "Bad Bunny", "Don Omar", "Tego Calderon"],
+    "key_tracks": ["Gasolina", "Mi Gente", "Mia", "Bandoleros"],
+    "spotify_track_id": null,
+    "tags": ["puerto-rican", "latin", "dembow", "dance"]
+  },
+  {
+    "id": "lo-fi-hip-hop",
+    "name": "Lo-Fi Hip-Hop",
+    "parent_ids": ["hip-hop", "jazz"],
+    "origin_year": 2010,
+    "origin_decade": "2010s",
+    "region": "United States",
+    "description": [
+      "Lo-fi hip-hop is built from jazz samples and hip-hop beats with deliberately degraded audio quality -- vinyl crackle, hiss, and compression artifacts treated as features rather than flaws. The aesthetic descends from J Dilla's beatmaking in the late 1990s, which embraced imprecision and human timing errors in drum programming as sources of feel. Nujabes's productions for the anime Samurai Champloo brought the sound to a devoted online following.",
+      "YouTube's 24-hour lo-fi streams -- 'lo-fi hip hop radio - beats to relax/study to' -- turned the genre into functional background music for a generation of remote workers and students. The music's commercial aspirations are modest by design; it exists to accompany focus rather than demand attention. Its success is largely a streaming phenomenon."
+    ],
+    "key_artists": ["J Dilla", "Nujabes", "Knxwledge", "Shing02", "Jinsang"],
+    "key_tracks": ["Donuts", "Feather", "Sugarman", "Perfect Blue"],
+    "spotify_track_id": null,
+    "tags": ["study", "chill", "sampling", "streaming"]
+  },
+  {
+    "id": "chillwave",
+    "name": "Chillwave",
+    "parent_ids": ["indie", "electronic"],
+    "origin_year": 2008,
+    "origin_decade": "2000s",
+    "region": "United States",
+    "description": [
+      "Chillwave was a short-lived blog-era micro-genre from around 2008-2010, defined by woozy synthesizer textures, heavily processed vocals, nostalgic imagery, and a lo-fi bedroom recording aesthetic. Washed Out, Neon Indian, and Toro y Moi were the central artists; the sound overlapped with witch house and dream pop.",
+      "The genre essentially burned out as quickly as it appeared, and many of its practitioners moved in different directions. Its cultural moment was tied to the early internet era when music blogs could create and dissolve micro-scenes in months. The sound has been absorbed into the broader category of indie electronic and continues to show up in production choices made by R&B and pop artists."
+    ],
+    "key_artists": ["Washed Out", "Neon Indian", "Toro y Moi", "Craft Spells", "Memoryhouse"],
+    "key_tracks": ["Feel It All Around", "Polish Girl", "Blessa"],
+    "spotify_track_id": null,
+    "tags": ["nostalgic", "bedroom", "hazy", "blog-era"]
+  },
+  {
+    "id": "deep-house",
+    "name": "Deep House",
+    "parent_ids": ["house"],
+    "origin_year": 1986,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Deep house descended from Chicago house but pushed the tempo down, the key signatures deeper into minor tonalities, and the production toward jazz chords, gospel-influenced piano, and soulful vocal performances. Larry Heard's productions as Mr. Fingers -- particularly 'Can You Feel It' from 1986 -- defined the sound: slow, warm, emotionally earnest, built for longer attention spans than harder house music demanded.",
+      "The genre experienced a significant commercial moment in the early 2010s when a sound associated with UK producers like Hot Natured and Disclosure brought polished, radio-friendly production to deep house's soulful foundations. That wave passed quickly, but underground deep house continues as one of the most developed and self-aware electronic genres, with a dedicated global following."
+    ],
+    "key_artists": ["Larry Heard", "Kerri Chandler", "Moodymann", "Theo Parrish", "Larry Heard"],
+    "key_tracks": ["Can You Feel It", "Atmosphere", "If I Gave You Love"],
+    "spotify_track_id": null,
+    "tags": ["soulful", "chicago", "warm", "jazz-influenced"]
+  },
+  {
+    "id": "trap-metal",
+    "name": "Trap Metal",
+    "parent_ids": ["trap", "metal"],
+    "origin_year": 2015,
+    "origin_decade": "2010s",
+    "region": "United States",
+    "description": [
+      "Trap metal -- sometimes called SoundCloud rap or rage rap -- fused the 808-heavy production and melodic rap vocals of trap with the distortion and aggression of metal. Ghostemane, Scarlxrd, and $uicideboy$ developed the sound independently around 2015-2016, using distorted guitars, blast beats, and screamed vocals over trap beats.",
+      "XXXTentacion brought a more emotionally complex version to a wide audience before his death in 2018. The genre reflects the collapse of genre distinctions among younger listeners who consumed metal, trap, emo, and indie through the same streaming platforms without the genre separations that had previously organized music consumption. Playboi Carti's Whole Lotta Red pushed the aesthetic toward something more purely abrasive."
+    ],
+    "key_artists": ["XXXTentacion", "Ghostemane", "$uicideboy$", "Scarlxrd", "Night Lovell"],
+    "key_tracks": ["Look At Me!", "NTMBS", "Kill Yourself Pt. III", "MASSACRE"],
+    "spotify_track_id": null,
+    "tags": ["hybrid", "aggressive", "soundcloud", "youth"]
+  },
+  {
+    "id": "bedroom-pop",
+    "name": "Bedroom Pop",
+    "parent_ids": ["indie-pop", "lo-fi-hip-hop"],
+    "origin_year": 2015,
+    "origin_decade": "2010s",
+    "region": "United States",
+    "description": [
+      "Bedroom pop describes music made at home -- often on a laptop, with minimal equipment -- that maintains the melodic songwriting ambitions of indie pop but embraces the sonic limitations of the recording environment. The lo-fi quality is sometimes accidental and sometimes deliberate, but in either case it becomes part of the music's intimacy.",
+      "Clairo's Flaming Hot Cheetos, recorded in her childhood bedroom and uploaded to YouTube in 2017, is the defining artifact: a song that sounded like it was genuinely from someone's private space, which connected immediately with listeners who recognized that feeling. Rex Orange County and Omar Apollo developed fuller productions within the same aesthetic, while Phoebe Bridgers brought a more confessional singer-songwriter approach to the same bedroom-recording framework."
+    ],
+    "key_artists": ["Clairo", "Rex Orange County", "beabadoobee", "Omar Apollo", "Phoebe Bridgers"],
+    "key_tracks": ["Pretty Girl", "Loving Is Easy", "Care", "Ivy"],
+    "spotify_track_id": null,
+    "tags": ["home-recording", "intimate", "2010s", "streaming"]
+  },
+  {
+    "id": "electro",
+    "name": "Electro",
+    "parent_ids": ["electronic", "hip-hop"],
+    "origin_year": 1982,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Electro emerged in New York around 1982, combining the Roland TR-808 drum machine that had just become affordable with synthesizer bass lines and the hip-hop aesthetic of the Bronx. Afrika Bambaataa's 'Planet Rock' -- which sampled Kraftwerk's 'Trans-Europe Express' and 'Numbers' directly -- was the founding document, pairing the German group's machine aesthetics with B-boy culture.",
+      "Electro was one of the first musics built entirely around electronic equipment rather than traditional instrumentation. Its influence runs in two directions: toward the Miami bass and Baltimore club scenes that developed regional variations on the 808, and toward the European electro scene of the 2000s that treated the aesthetic as a historical source to be revived and updated by Daft Punk and others."
+    ],
+    "key_artists": ["Afrika Bambaataa", "Grandmaster Flash", "Hashim", "Egyptian Lover", "Man Parrish"],
+    "key_tracks": ["Planet Rock", "Al-Naafiysh (The Soul)", "Freak-a-Robic"],
+    "spotify_track_id": null,
+    "tags": ["808", "new-york", "hip-hop-adjacent", "synthesizer"]
+  },
+  {
+    "id": "latin-pop",
+    "name": "Latin Pop",
+    "parent_ids": ["pop", "bossa-nova", "reggaeton"],
+    "origin_year": 1985,
+    "origin_decade": "1980s",
+    "region": "United States",
+    "description": [
+      "Latin pop is the broad category of Spanish-language popular music that crosses into mainstream charts. Gloria Estefan and Miami Sound Machine in the 1980s were among the first acts to achieve major crossover success by packaging Cuban rhythms in contemporary pop production. Selena's career in Texas built a massive Tejano-influenced pop audience before her murder in 1995 made her an icon.",
+      "The 1999 Latin Pop Explosion brought Ricky Martin, Marc Anthony, Jennifer Lopez, and Enrique Iglesias to mass American audiences simultaneously. Shakira and Pitbull expanded the global reach further. Latin pop's relationship to reggaeton has grown increasingly close since the late 2000s, with the two genres freely borrowing production styles. Bad Bunny's crossover success has made Spanish-language pop commercially competitive with English-language music globally."
+    ],
+    "key_artists": ["Gloria Estefan", "Selena", "Shakira", "Bad Bunny", "J Balvin"],
+    "key_tracks": ["Conga", "Como La Flor", "Hips Don't Lie", "DАКITI"],
+    "spotify_track_id": null,
+    "tags": ["spanish", "crossover", "latin", "radio"]
+  },
+  {
+    "id": "soul-blues",
+    "name": "Soul Blues",
+    "parent_ids": ["blues", "soul"],
+    "origin_year": 1960,
+    "origin_decade": "1960s",
+    "region": "United States",
+    "description": [
+      "Soul blues describes the fusion that developed in the 1960s and 1970s when soul music's gospel-derived intensity combined with the blues tradition's lyrical directness and guitar-based arrangements. Bobby Bland was its defining practitioner -- his recordings for Duke Records in the 1960s applied gospel phrasing and big-band arrangements to blues subject matter, creating something warmer and more polished than raw delta blues but more rooted than mainstream soul.",
+      "The genre remained mostly beneath pop radar -- popular in Black communities in the American South but rarely crossing to mainstream charts. Little Milton, Tyrone Davis, and Denise LaSalle carried the tradition through the 1970s and 1980s. Soul blues circuits still exist in the South today, with artists like Marvin Sease and Theodis Ealey maintaining the tradition for a dedicated regional audience."
+    ],
+    "key_artists": ["Bobby Bland", "Little Milton", "Tyrone Davis", "O.V. Wright", "Z.Z. Hill"],
+    "key_tracks": ["Turn On Your Love Light", "We're Gonna Make It", "In the Ghetto"],
+    "spotify_track_id": null,
+    "tags": ["southern", "american", "gospel", "r&b-adjacent"]
+  }
+]

@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musiki - The Complete Map of Music Evolution</title>
+  <meta name="description" content="An interactive map of music genres and how they evolved, from blues and classical roots to trap metal and bedroom pop." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface-raised: #1c2230;
+      --border: #21262d;
+      --border-subtle: #1a1f27;
+      --text: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #484f58;
+      --accent: #58a6ff;
+      --accent-hover: #79b8ff;
+      --panel-width: 400px;
+      --topbar-height: 60px;
+      --filter-height: 52px;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ===== TOPBAR ===== */
+    #topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--topbar-height);
+      background: rgba(13, 17, 23, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+      z-index: 200;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #58a6ff, #bc8cff);
+      flex-shrink: 0;
+    }
+
+    .search-wrap {
+      flex: 1;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      width: 15px;
+      height: 15px;
+    }
+
+    #search {
+      width: 100%;
+      height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 0 12px 0 32px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    #search:focus {
+      border-color: var(--accent);
+    }
+
+    #search::placeholder {
+      color: var(--text-muted);
+    }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .genre-count {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .btn-icon:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    /* ===== ERA FILTER BAR ===== */
+    #filter-bar {
+      position: fixed;
+      top: var(--topbar-height);
+      left: 0;
+      right: 0;
+      height: var(--filter-height);
+      background: rgba(13, 17, 23, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 6px;
+      overflow-x: auto;
+      z-index: 190;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    #filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+
+    .era-btn {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .era-btn:hover {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .era-btn.active {
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .era-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== GRAPH CANVAS ===== */
+    #graph-container {
+      position: fixed;
+      top: calc(var(--topbar-height) + var(--filter-height));
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    #graph {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+
+    #graph:active {
+      cursor: grabbing;
+    }
+
+    /* D3 graph elements */
+    .link {
+      stroke: #1e2a3a;
+      stroke-width: 1.5;
+      stroke-opacity: 0.7;
+      fill: none;
+      transition: stroke-opacity 0.2s;
+    }
+
+    .link.highlighted {
+      stroke: #3a5470;
+      stroke-opacity: 1;
+    }
+
+    .node-circle {
+      stroke-width: 1.5;
+      cursor: pointer;
+      transition: filter 0.15s;
+    }
+
+    .node-circle:hover {
+      filter: brightness(1.3);
+    }
+
+    .node-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      fill: #c9d1d9;
+      pointer-events: none;
+      text-anchor: middle;
+    }
+
+    /* ===== SIDE PANEL ===== */
+    #panel {
+      position: fixed;
+      top: calc(var(--topbar-height) + var(--filter-height));
+      right: 0;
+      bottom: 0;
+      width: var(--panel-width);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #panel.open {
+      transform: translateX(0);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .panel-title-group {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .panel-genre-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .panel-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .era-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .meta-item svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    #panel-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 12px;
+      transition: all 0.15s;
+    }
+
+    #panel-close:hover {
+      background: var(--surface-raised);
+      color: var(--text);
+    }
+
+    #panel-close svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .panel-section {
+      margin-bottom: 24px;
+    }
+
+    .panel-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-section-title svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .panel-description p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .panel-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .genre-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .genre-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface-raised);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .genre-link:hover {
+      border-color: var(--accent);
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    .genre-link svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .artist-list {
+      list-style: none;
+    }
+
+    .artist-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .artist-list li:last-child {
+      border-bottom: none;
+    }
+
+    .artist-num {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--surface-raised);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tracks-list {
+      list-style: none;
+    }
+
+    .tracks-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .tracks-list li:last-child {
+      border-bottom: none;
+    }
+
+    .spotify-embed {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .spotify-embed iframe {
+      display: block;
+      border: none;
+      border-radius: 8px;
+    }
+
+    /* ===== LEGEND ===== */
+    #legend {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(22, 27, 34, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      z-index: 100;
+    }
+
+    .legend-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== CONTROLS ===== */
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 100;
+    }
+
+    .ctrl-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(22, 27, 34, 0.9);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      backdrop-filter: blur(8px);
+    }
+
+    .ctrl-btn:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .ctrl-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* ===== LOADING ===== */
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.4s;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-logo {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .loading-bar {
+      width: 200px;
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loading-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #58a6ff, #bc8cff);
+      border-radius: 2px;
+      animation: loadfill 1.2s ease-out forwards;
+    }
+
+    @keyframes loadfill {
+      0% { width: 0%; }
+      60% { width: 70%; }
+      100% { width: 100%; }
+    }
+
+    .loading-text {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== TOOLTIP ===== */
+    #tooltip {
+      position: fixed;
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      pointer-events: none;
+      z-index: 300;
+      opacity: 0;
+      transition: opacity 0.1s;
+      white-space: nowrap;
+    }
+
+    #tooltip.visible {
+      opacity: 1;
+    }
+
+    /* ===== SEARCH RESULTS ===== */
+    #search-results {
+      position: absolute;
+      top: 38px;
+      left: 0;
+      right: 0;
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 400;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: none;
+    }
+
+    #search-results.visible {
+      display: block;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: background 0.1s;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item:hover {
+      background: var(--surface);
+    }
+
+    .search-result-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .search-result-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .search-result-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      :root {
+        --panel-width: 100%;
+      }
+
+      #panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70vh;
+        transform: translateY(100%);
+        border-left: none;
+        border-top: 1px solid var(--border);
+        border-radius: 16px 16px 0 0;
+      }
+
+      #panel.open {
+        transform: translateY(0);
+      }
+
+      #legend {
+        display: none;
+      }
+
+      .logo-text-sub {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading">
+  <div class="loading-logo">Musiki</div>
+  <div class="loading-bar">
+    <div class="loading-fill"></div>
+  </div>
+  <div class="loading-text">Building the tree...</div>
+</div>
+
+<!-- Topbar -->
+<div id="topbar">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Musiki
+  </div>
+
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="search" id="search" placeholder="Search genres..." autocomplete="off" />
+    <div id="search-results"></div>
+  </div>
+
+  <div class="topbar-right">
+    <span class="genre-count" id="genre-count"></span>
+  </div>
+</div>
+
+<!-- Era Filter Bar -->
+<div id="filter-bar">
+  <span class="filter-label">Era</span>
+  <button class="era-btn active" data-era="all">
+    All
+  </button>
+</div>
+
+<!-- Graph -->
+<div id="graph-container">
+  <svg id="graph"></svg>
+</div>
+
+<!-- Side Panel -->
+<aside id="panel">
+  <div class="panel-header">
+    <div class="panel-title-group">
+      <div class="panel-genre-name" id="panel-genre-name">Genre Name</div>
+      <div class="panel-meta" id="panel-meta"></div>
+    </div>
+    <button id="panel-close" aria-label="Close panel">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</aside>
+
+<!-- Legend -->
+<div id="legend">
+  <div class="legend-title">Era</div>
+  <div class="legend-grid" id="legend-grid"></div>
+</div>
+
+<!-- Zoom Controls -->
+<div id="controls">
+  <button class="ctrl-btn" id="zoom-in" title="Zoom in">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+    </svg>
+  </button>
+  <button class="ctrl-btn" id="zoom-out" title="Zoom out">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="8" y1="11" x2="14" y2="11"/>
+    </svg>
+  </button>
+  <button class="ctrl-btn" id="zoom-fit" title="Fit to screen">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip"></div>
+
+<!-- D3 + Script -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(async function() {
+
+  // ===== ERA COLOR PALETTE =====
+  const ERA_COLORS = {
+    'pre-1900': '#A07530',
+    '1900s':    '#C05A28',
+    '1910s':    '#B84020',
+    '1920s':    '#C9900A',
+    '1930s':    '#8A7A00',
+    '1940s':    '#4A7A38',
+    '1950s':    '#1A7860',
+    '1960s':    '#0A6888',
+    '1970s':    '#1850B8',
+    '1980s':    '#7A3FA0',
+    '1990s':    '#C01870',
+    '2000s':    '#0090C5',
+    '2010s':    '#00B048',
+    '2020s':    '#C010A8',
+  };
+
+  const ERA_LABELS = {
+    'pre-1900': 'Pre-1900',
+    '1900s': '1900s',
+    '1910s': '1910s',
+    '1920s': '1920s',
+    '1930s': '1930s',
+    '1940s': '1940s',
+    '1950s': '1950s',
+    '1960s': '1960s',
+    '1970s': '1970s',
+    '1980s': '1980s',
+    '1990s': '1990s',
+    '2000s': '2000s',
+    '2010s': '2010s',
+    '2020s': '2020s',
+  };
+
+  // Load genre data
+  let genres;
+  try {
+    genres = await fetch('data/genres.json').then(r => {
+      if (!r.ok) throw new Error('Failed to load genres.json');
+      return r.json();
+    });
+  } catch(e) {
+    document.getElementById('loading').innerHTML = `
+      <div style="text-align:center;color:#8b949e">
+        <div style="font-size:18px;margin-bottom:8px;">Could not load genre data</div>
+        <div style="font-size:13px;">${e.message}</div>
+      </div>`;
+    return;
+  }
+
+  // Build lookup
+  const genreMap = new Map(genres.map(g => [g.id, g]));
+
+  // Count children
+  const childrenMap = new Map();
+  const parentLinksMap = new Map();
+  genres.forEach(g => {
+    childrenMap.set(g.id, []);
+    parentLinksMap.set(g.id, []);
+  });
+  genres.forEach(g => {
+    g.parent_ids.forEach(pid => {
+      if (childrenMap.has(pid)) childrenMap.get(pid).push(g.id);
+      if (parentLinksMap.has(g.id)) parentLinksMap.get(g.id).push(pid);
+    });
+  });
+
+  // Build D3 graph data
+  const nodes = genres.map(g => ({ ...g }));
+  const links = [];
+  genres.forEach(g => {
+    g.parent_ids.forEach(pid => {
+      if (genreMap.has(pid)) {
+        links.push({ source: pid, target: g.id });
+      }
+    });
+  });
+
+  // Genre count display
+  document.getElementById('genre-count').textContent = `${genres.length} genres`;
+
+  // ===== BUILD ERA FILTER BUTTONS =====
+  const eras = [...new Set(genres.map(g => g.origin_decade))].sort((a, b) => {
+    const order = ['pre-1900','1900s','1910s','1920s','1930s','1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'];
+    return order.indexOf(a) - order.indexOf(b);
+  });
+
+  const filterBar = document.getElementById('filter-bar');
+  eras.forEach(era => {
+    const btn = document.createElement('button');
+    btn.className = 'era-btn';
+    btn.dataset.era = era;
+    btn.innerHTML = `<span class="era-dot" style="background:${ERA_COLORS[era] || '#58a6ff'}"></span>${ERA_LABELS[era] || era}`;
+    filterBar.appendChild(btn);
+  });
+
+  // ===== BUILD LEGEND =====
+  const legendGrid = document.getElementById('legend-grid');
+  eras.forEach(era => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="legend-dot" style="background:${ERA_COLORS[era] || '#58a6ff'}"></span><span>${ERA_LABELS[era] || era}</span>`;
+    legendGrid.appendChild(item);
+  });
+
+  // ===== SVG SETUP =====
+  const container = document.getElementById('graph-container');
+  const W = container.clientWidth;
+  const H = container.clientHeight;
+
+  const svg = d3.select('#graph')
+    .attr('width', W)
+    .attr('height', H);
+
+  // Defs: gradient for links
+  const defs = svg.append('defs');
+  const linkGrad = defs.append('linearGradient')
+    .attr('id', 'link-grad')
+    .attr('gradientUnits', 'userSpaceOnUse');
+  linkGrad.append('stop').attr('offset', '0%').attr('stop-color', '#1e3a5a').attr('stop-opacity', 0.8);
+  linkGrad.append('stop').attr('offset', '100%').attr('stop-color', '#1e3a5a').attr('stop-opacity', 0.3);
+
+  const g = svg.append('g').attr('class', 'graph-root');
+
+  // Node radius function
+  const nodeRadius = (d) => {
+    const childCount = childrenMap.get(d.id)?.length || 0;
+    const isRoot = d.parent_ids.length === 0;
+    return Math.max(10, Math.min(28, (isRoot ? 18 : 10) + childCount * 1.8));
+  };
+
+  // ===== FORCE SIMULATION =====
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
+      const srcIsRoot = genreMap.get(typeof d.source === 'string' ? d.source : d.source.id)?.parent_ids.length === 0;
+      return srcIsRoot ? 160 : 120;
+    }).strength(0.4))
+    .force('charge', d3.forceManyBody().strength(d => {
+      const childCount = childrenMap.get(d.id)?.length || 0;
+      return -350 - childCount * 30;
+    }))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide().radius(d => nodeRadius(d) + 18).strength(0.8))
+    .alphaDecay(0.015);
+
+  // ===== DRAW LINKS =====
+  const linkGroup = g.append('g').attr('class', 'links');
+  const linkSel = linkGroup.selectAll('line')
+    .data(links)
+    .join('line')
+    .attr('class', 'link')
+    .attr('stroke', '#1e2d40')
+    .attr('stroke-width', 1.5)
+    .attr('stroke-opacity', 0.6);
+
+  // ===== DRAW NODES =====
+  const nodeGroup = g.append('g').attr('class', 'nodes');
+  const nodeSel = nodeGroup.selectAll('g.node-g')
+    .data(nodes)
+    .join('g')
+    .attr('class', 'node-g')
+    .style('cursor', 'pointer');
+
+  // Circle
+  nodeSel.append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', d => nodeRadius(d))
+    .attr('fill', d => ERA_COLORS[d.origin_decade] || '#58a6ff')
+    .attr('fill-opacity', 0.88)
+    .attr('stroke', d => {
+      const c = d3.color(ERA_COLORS[d.origin_decade] || '#58a6ff');
+      return c ? c.brighter(0.6).toString() : '#fff';
+    })
+    .attr('stroke-width', 1.5);
+
+  // Root genre glow ring
+  nodeSel.filter(d => d.parent_ids.length === 0)
+    .insert('circle', 'circle')
+    .attr('r', d => nodeRadius(d) + 6)
+    .attr('fill', 'none')
+    .attr('stroke', d => ERA_COLORS[d.origin_decade] || '#58a6ff')
+    .attr('stroke-width', 1)
+    .attr('stroke-opacity', 0.3);
+
+  // Labels
+  nodeSel.append('text')
+    .attr('class', 'node-label')
+    .attr('dy', d => nodeRadius(d) + 13)
+    .style('font-size', d => d.parent_ids.length === 0 ? '12px' : '10.5px')
+    .style('font-weight', d => d.parent_ids.length === 0 ? '600' : '500')
+    .text(d => d.name);
+
+  // ===== DRAG =====
+  const drag = d3.drag()
+    .on('start', (event, d) => {
+      if (!event.active) sim.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    })
+    .on('drag', (event, d) => {
+      d.fx = event.x;
+      d.fy = event.y;
+    })
+    .on('end', (event, d) => {
+      if (!event.active) sim.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    });
+
+  nodeSel.call(drag);
+
+  // ===== ZOOM =====
+  let currentZoom = d3.zoomIdentity;
+  const zoom = d3.zoom()
+    .scaleExtent([0.08, 5])
+    .on('zoom', (event) => {
+      currentZoom = event.transform;
+      g.attr('transform', event.transform);
+    });
+
+  svg.call(zoom).on('dblclick.zoom', null);
+
+  // ===== TICK =====
+  sim.on('tick', () => {
+    linkSel
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+
+    nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // Fit to screen after simulation settles
+  sim.on('end', () => {
+    fitView(500);
+  });
+
+  setTimeout(() => {
+    document.getElementById('loading').classList.add('hidden');
+    setTimeout(() => fitView(800), 300);
+  }, 1400);
+
+  function fitView(duration) {
+    if (nodes.length === 0) return;
+    const xExtent = d3.extent(nodes, d => d.x);
+    const yExtent = d3.extent(nodes, d => d.y);
+    const dx = xExtent[1] - xExtent[0] + 120;
+    const dy = yExtent[1] - yExtent[0] + 120;
+    const midX = (xExtent[0] + xExtent[1]) / 2;
+    const midY = (yExtent[0] + yExtent[1]) / 2;
+    const scale = Math.min(0.9, 0.9 / Math.max(dx / W, dy / H));
+    const transform = d3.zoomIdentity
+      .translate(W / 2, H / 2)
+      .scale(scale)
+      .translate(-midX, -midY);
+
+    svg.transition().duration(duration).ease(d3.easeCubicInOut)
+      .call(zoom.transform, transform);
+  }
+
+  // Zoom controls
+  document.getElementById('zoom-in').addEventListener('click', () => {
+    svg.transition().duration(250).call(zoom.scaleBy, 1.5);
+  });
+  document.getElementById('zoom-out').addEventListener('click', () => {
+    svg.transition().duration(250).call(zoom.scaleBy, 0.67);
+  });
+  document.getElementById('zoom-fit').addEventListener('click', () => fitView(500));
+
+  // ===== TOOLTIP =====
+  const tooltip = document.getElementById('tooltip');
+
+  nodeSel
+    .on('mouseenter', (event, d) => {
+      tooltip.textContent = `${d.name} — ${d.origin_decade} — ${d.region}`;
+      tooltip.classList.add('visible');
+      highlightGenre(d.id);
+    })
+    .on('mousemove', (event) => {
+      tooltip.style.left = (event.clientX + 14) + 'px';
+      tooltip.style.top = (event.clientY - 10) + 'px';
+    })
+    .on('mouseleave', () => {
+      tooltip.classList.remove('visible');
+      resetHighlight();
+    })
+    .on('click', (event, d) => {
+      event.stopPropagation();
+      openPanel(d);
+    });
+
+  svg.on('click', () => {
+    closePanel();
+    resetHighlight();
+    clearSearch();
+  });
+
+  // ===== HIGHLIGHT =====
+  function highlightGenre(id) {
+    const connected = new Set([id]);
+    const parentIds = parentLinksMap.get(id) || [];
+    const childIds = childrenMap.get(id) || [];
+    parentIds.forEach(p => connected.add(p));
+    childIds.forEach(c => connected.add(c));
+
+    nodeSel.selectAll('circle.node-circle')
+      .attr('fill-opacity', d2 => connected.has(d2.id) ? 0.95 : 0.2)
+      .attr('stroke-opacity', d2 => connected.has(d2.id) ? 1 : 0.15);
+
+    nodeSel.selectAll('text.node-label')
+      .attr('fill-opacity', d2 => connected.has(d2.id) ? 1 : 0.2);
+
+    linkSel
+      .attr('stroke-opacity', l => {
+        const s = typeof l.source === 'object' ? l.source.id : l.source;
+        const t = typeof l.target === 'object' ? l.target.id : l.target;
+        return (s === id || t === id) ? 0.9 : 0.1;
+      })
+      .attr('stroke', l => {
+        const s = typeof l.source === 'object' ? l.source.id : l.source;
+        const t = typeof l.target === 'object' ? l.target.id : l.target;
+        return (s === id || t === id) ? '#3a6090' : '#1e2d40';
+      })
+      .attr('stroke-width', l => {
+        const s = typeof l.source === 'object' ? l.source.id : l.source;
+        const t = typeof l.target === 'object' ? l.target.id : l.target;
+        return (s === id || t === id) ? 2.5 : 1.5;
+      });
+  }
+
+  function resetHighlight() {
+    if (activeEra !== 'all') {
+      applyEraFilter(activeEra);
+      return;
+    }
+    nodeSel.selectAll('circle.node-circle')
+      .attr('fill-opacity', 0.88)
+      .attr('stroke-opacity', 1);
+    nodeSel.selectAll('text.node-label')
+      .attr('fill-opacity', 1);
+    linkSel
+      .attr('stroke-opacity', 0.6)
+      .attr('stroke', '#1e2d40')
+      .attr('stroke-width', 1.5);
+  }
+
+  // ===== PANEL =====
+  const panel = document.getElementById('panel');
+  let activeGenreId = null;
+
+  function openPanel(genre) {
+    activeGenreId = genre.id;
+    panel.classList.add('open');
+    renderPanel(genre);
+    highlightGenre(genre.id);
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    activeGenreId = null;
+    resetHighlight();
+  }
+
+  document.getElementById('panel-close').addEventListener('click', closePanel);
+
+  function renderPanel(genre) {
+    document.getElementById('panel-genre-name').textContent = genre.name;
+
+    // Meta
+    const metaEl = document.getElementById('panel-meta');
+    const eraColor = ERA_COLORS[genre.origin_decade] || '#58a6ff';
+    metaEl.innerHTML = `
+      <span class="era-badge" style="background:${eraColor}22;color:${eraColor};border:1px solid ${eraColor}44">
+        ${genre.origin_decade}
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        ${genre.region}
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        ${genre.origin_year}
+      </span>
+    `;
+
+    // Body sections
+    const body = document.getElementById('panel-body');
+    body.innerHTML = '';
+
+    // Description
+    const descriptions = Array.isArray(genre.description) ? genre.description : [genre.description];
+    const descSection = document.createElement('div');
+    descSection.className = 'panel-section panel-description';
+    descSection.innerHTML = descriptions.map(p => `<p>${p}</p>`).join('');
+    body.appendChild(descSection);
+
+    // Parent genres
+    const parents = genre.parent_ids
+      .map(pid => genreMap.get(pid))
+      .filter(Boolean);
+
+    if (parents.length > 0) {
+      const pSection = document.createElement('div');
+      pSection.className = 'panel-section';
+      pSection.innerHTML = `
+        <div class="panel-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Roots
+        </div>
+        <div class="genre-links">
+          ${parents.map(p => `
+            <span class="genre-link" data-genre-id="${p.id}" style="border-color:${ERA_COLORS[p.origin_decade] || '#333'}44;color:${ERA_COLORS[p.origin_decade] || '#58a6ff'}">
+              ${p.name}
+            </span>
+          `).join('')}
+        </div>
+      `;
+      body.appendChild(pSection);
+    }
+
+    // Child genres
+    const children = (childrenMap.get(genre.id) || [])
+      .map(cid => genreMap.get(cid))
+      .filter(Boolean);
+
+    if (children.length > 0) {
+      const cSection = document.createElement('div');
+      cSection.className = 'panel-section';
+      cSection.innerHTML = `
+        <div class="panel-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Descended Genres (${children.length})
+        </div>
+        <div class="genre-links">
+          ${children.map(c => `
+            <span class="genre-link" data-genre-id="${c.id}" style="border-color:${ERA_COLORS[c.origin_decade] || '#333'}44;color:${ERA_COLORS[c.origin_decade] || '#58a6ff'}">
+              ${c.name}
+            </span>
+          `).join('')}
+        </div>
+      `;
+      body.appendChild(cSection);
+    }
+
+    // Key Artists
+    if (genre.key_artists && genre.key_artists.length > 0) {
+      const aSection = document.createElement('div');
+      aSection.className = 'panel-section';
+      aSection.innerHTML = `
+        <div class="panel-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Key Artists
+        </div>
+        <ul class="artist-list">
+          ${genre.key_artists.map((a, i) => `
+            <li>
+              <span class="artist-num">${i + 1}</span>
+              ${a}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+      body.appendChild(aSection);
+    }
+
+    // Key Tracks
+    if (genre.key_tracks && genre.key_tracks.length > 0) {
+      const tSection = document.createElement('div');
+      tSection.className = 'panel-section';
+
+      let tracksHTML = `
+        <div class="panel-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Key Tracks
+        </div>
+      `;
+
+      if (genre.spotify_track_id) {
+        tracksHTML += `
+          <div class="spotify-embed">
+            <iframe 
+              src="https://open.spotify.com/embed/track/${genre.spotify_track_id}" 
+              width="100%" 
+              height="80" 
+              frameborder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+          </div>
+        `;
+      }
+
+      tracksHTML += `
+        <ul class="tracks-list" style="margin-top:${genre.spotify_track_id ? '10px' : '0'}">
+          ${genre.key_tracks.map(t => `<li>${t}</li>`).join('')}
+        </ul>
+      `;
+
+      tSection.innerHTML = tracksHTML;
+      body.appendChild(tSection);
+    }
+
+    // Genre link click handlers
+    body.querySelectorAll('[data-genre-id]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const gid = el.dataset.genreId;
+        const targetGenre = genreMap.get(gid);
+        if (targetGenre) {
+          openPanel(targetGenre);
+          zoomToNode(gid);
+        }
+      });
+    });
+  }
+
+  function zoomToNode(id) {
+    const node = nodes.find(n => n.id === id);
+    if (!node || !node.x || !node.y) return;
+    const scale = 1.5;
+    const transform = d3.zoomIdentity
+      .translate(W / 2, H / 2)
+      .scale(scale)
+      .translate(-node.x, -node.y);
+    svg.transition().duration(500).ease(d3.easeCubicInOut)
+      .call(zoom.transform, transform);
+  }
+
+  // ===== ERA FILTER =====
+  let activeEra = 'all';
+
+  filterBar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.era-btn');
+    if (!btn) return;
+    const era = btn.dataset.era;
+
+    filterBar.querySelectorAll('.era-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = '';
+      b.style.color = '';
+    });
+
+    if (era === activeEra && era !== 'all') {
+      activeEra = 'all';
+      filterBar.querySelector('[data-era="all"]').classList.add('active');
+      resetHighlight();
+    } else {
+      activeEra = era;
+      btn.classList.add('active');
+      if (era !== 'all') {
+        const c = ERA_COLORS[era];
+        if (c) {
+          btn.style.background = `${c}22`;
+          btn.style.color = c;
+          btn.style.borderColor = `${c}66`;
+        }
+      }
+      applyEraFilter(era);
+    }
+  });
+
+  function applyEraFilter(era) {
+    if (era === 'all') {
+      resetHighlight();
+      return;
+    }
+
+    nodeSel.selectAll('circle.node-circle')
+      .attr('fill-opacity', d => d.origin_decade === era ? 0.95 : 0.08)
+      .attr('stroke-opacity', d => d.origin_decade === era ? 1 : 0.1);
+
+    nodeSel.selectAll('text.node-label')
+      .attr('fill-opacity', d => d.origin_decade === era ? 1 : 0.08);
+
+    linkSel
+      .attr('stroke-opacity', l => {
+        const s = typeof l.source === 'object' ? l.source : genreMap.get(l.source);
+        const t = typeof l.target === 'object' ? l.target : genreMap.get(l.target);
+        return (s?.origin_decade === era || t?.origin_decade === era) ? 0.5 : 0.05;
+      })
+      .attr('stroke', '#1e2d40')
+      .attr('stroke-width', 1.5);
+  }
+
+  // ===== SEARCH =====
+  const searchInput = document.getElementById('search');
+  const searchResults = document.getElementById('search-results');
+
+  function clearSearch() {
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('visible');
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+
+    if (!q) {
+      searchResults.classList.remove('visible');
+      if (activeEra === 'all') resetHighlight();
+      return;
+    }
+
+    const matches = genres.filter(g =>
+      g.name.toLowerCase().includes(q) ||
+      g.region.toLowerCase().includes(q) ||
+      (g.tags || []).some(t => t.includes(q)) ||
+      g.origin_decade.includes(q)
+    ).slice(0, 8);
+
+    if (matches.length === 0) {
+      searchResults.classList.remove('visible');
+      return;
+    }
+
+    searchResults.innerHTML = matches.map(g => `
+      <div class="search-result-item" data-id="${g.id}">
+        <span class="search-result-dot" style="background:${ERA_COLORS[g.origin_decade] || '#58a6ff'}"></span>
+        <span class="search-result-name">${g.name}</span>
+        <span class="search-result-meta">${g.origin_decade} - ${g.region}</span>
+      </div>
+    `).join('');
+    searchResults.classList.add('visible');
+
+    // Highlight matching nodes
+    const matchIds = new Set(matches.map(g => g.id));
+    nodeSel.selectAll('circle.node-circle')
+      .attr('fill-opacity', d => matchIds.has(d.id) ? 0.95 : 0.1)
+      .attr('stroke-opacity', d => matchIds.has(d.id) ? 1 : 0.1);
+    nodeSel.selectAll('text.node-label')
+      .attr('fill-opacity', d => matchIds.has(d.id) ? 1 : 0.1);
+    linkSel
+      .attr('stroke-opacity', l => {
+        const s = typeof l.source === 'object' ? l.source.id : l.source;
+        const t = typeof l.target === 'object' ? l.target.id : l.target;
+        return (matchIds.has(s) && matchIds.has(t)) ? 0.5 : 0.05;
+      });
+  });
+
+  searchResults.addEventListener('click', (e) => {
+    const item = e.target.closest('[data-id]');
+    if (!item) return;
+    const genre = genreMap.get(item.dataset.id);
+    if (genre) {
+      searchResults.classList.remove('visible');
+      searchInput.value = genre.name;
+      openPanel(genre);
+      zoomToNode(genre.id);
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-wrap')) {
+      searchResults.classList.remove('visible');
+    }
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') clearSearch();
+  });
+
+})();
+</script>
+</body>
+</html>
