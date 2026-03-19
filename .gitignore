@@ -1,0 +1,11 @@
+# Root-level data duplicates (canonical copy is in docs/data/)
+genres.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo

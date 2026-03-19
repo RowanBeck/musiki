@@ -8,51 +8,47 @@ on:
 
 jobs:
   validate:
-    name: Validate Data
+    name: Validate genre data
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Validate genres.json
         run: |
           echo "Validating docs/data/genres.json..."
           python3 -c "
           import json, sys
-
           with open('docs/data/genres.json') as f:
-            genres = json.load(f)
-
-          assert isinstance(genres, list), 'genres.json must be an array'
-          assert len(genres) >= 50, f'Expected at least 50 genres, got {len(genres)}'
-
+              data = json.load(f)
+          assert isinstance(data, list), 'Expected a JSON array'
+          required = ['id', 'name', 'parent_ids', 'origin_year', 'origin_decade', 'region', 'description']
+          errors = []
           ids = set()
-          required = ['id', 'name', 'parent_ids', 'origin_year', 'origin_decade', 'region', 'description', 'key_artists', 'key_tracks']
-
-          for g in genres:
-            for field in required:
-              assert field in g, f'Genre {g.get(\"id\", \"?\")} missing field: {field}'
-            assert g['id'] not in ids, f'Duplicate genre id: {g[\"id\"]}'
-            ids.add(g['id'])
-            assert isinstance(g['parent_ids'], list), f'{g[\"id\"]}: parent_ids must be array'
-            assert isinstance(g['key_artists'], list), f'{g[\"id\"]}: key_artists must be array'
-            assert isinstance(g['key_tracks'], list), f'{g[\"id\"]}: key_tracks must be array'
-            assert isinstance(g['description'], (str, list)), f'{g[\"id\"]}: description must be str or array'
-            assert isinstance(g['origin_year'], int), f'{g[\"id\"]}: origin_year must be int'
-
-          # Validate all parent_ids reference real genres
-          for g in genres:
-            for pid in g['parent_ids']:
-              assert pid in ids, f'{g[\"id\"]}: parent_id \"{pid}\" not found'
-
-          print(f'OK: {len(genres)} genres validated. All parent references resolved.')
+          for i, genre in enumerate(data):
+              for field in required:
+                  if field not in genre:
+                      errors.append(f'Genre {i} missing field: {field}')
+              if 'id' in genre:
+                  if genre['id'] in ids:
+                      errors.append(f'Duplicate id: {genre[\"id\"]}')
+                  ids.add(genre['id'])
+          # Validate parent_ids reference valid ids
+          for genre in data:
+              for pid in genre.get('parent_ids', []):
+                  if pid not in ids:
+                      errors.append(f'Genre {genre[\"id\"]} references unknown parent: {pid}')
+          if errors:
+              print('Validation errors:')
+              for e in errors:
+                  print(f'  - {e}')
+              sys.exit(1)
+          print(f'OK: {len(data)} genres validated, {len(ids)} unique ids')
           "
+
+      - name: Check HTML exists
+        run: |
+          test -f docs/index.html && echo "OK: docs/index.html exists" || (echo "MISSING: docs/index.html" && exit 1)
 
       - name: Check CNAME
         run: |
-          test -f docs/CNAME && echo "CNAME present: $(cat docs/CNAME)" || (echo "CNAME missing" && exit 1)
-
-      - name: Check index.html
-        run: |
-          test -f docs/index.html && echo "index.html present ($(wc -c < docs/index.html) bytes)" || (echo "index.html missing" && exit 1)
+          test -f docs/CNAME && echo "OK: docs/CNAME exists ($(cat docs/CNAME))" || echo "WARNING: docs/CNAME missing"

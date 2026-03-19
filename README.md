@@ -1,46 +1,59 @@
 # Musiki
 
-The complete map of music genres and how they evolved.
+An interactive map of music genres and how they evolved -- from blues and classical roots to trap metal and bedroom pop.
 
 Live at [musiki.tiessen.me](https://musiki.tiessen.me)
 
+---
+
 ## What It Is
 
-Musiki is an interactive single-page app that visualizes the evolutionary tree of music genres, from pre-1900 roots like Blues, Classical, Folk, and Jazz through to contemporary forms like Trap, Bedroom Pop, and Afrobeats.
+Musiki is a static reference site that visualizes 80 music genres as a force-directed graph, showing parent-child relationships across 300+ years of music history. Click any node to open a wiki-style panel with description, key artists, notable tracks, and a Spotify embed.
 
 ## Features
 
-- Interactive D3 force-directed graph of 65+ genres
-- Color-coded by era (warm tones for older genres, cool/vivid for newer)
-- Click any genre to open a reference panel with description, origins, artists, tracks, and Spotify embed
-- Search across all genres by name, region, or tag
-- Filter by era (decade buttons)
-- Smooth zoom, pan, and drag
-- Mobile responsive
-
-## Data
-
-Genre data lives in `docs/data/genres.json`. Each genre includes:
-
-- `id` - unique slug
-- `name` - display name
-- `parent_ids` - which genres it evolved from
-- `origin_year`, `origin_decade` - when it emerged
-- `region` - where it came from
-- `description` - 2-3 paragraph human-written summary
-- `key_artists` - 3-5 defining artists
-- `key_tracks` - 3-5 essential tracks
-- `spotify_track_id` - optional, for Spotify embed
-- `tags` - searchable labels
-
-## Root Genres (No Parents)
-
-Blues, Folk, Classical, Jazz, Gospel, Country, Bluegrass
+- **D3.js force graph** -- 80 genre nodes with era-based coloring, zoom/pan, and drag
+- **Genre panels** -- full description, parent genres, sub-genres, key artists, key tracks, Spotify embed
+- **Era filter** -- highlight genres by decade from Pre-1900 through the 2020s
+- **Real-time search** -- filter and navigate to any genre instantly
+- **Static** -- no server, no build step, loads directly from GitHub Pages
 
 ## Tech
 
-Vanilla HTML/CSS/JS. D3.js v7. No build step. No framework. Deployed via GitHub Pages.
+- Vanilla HTML/CSS/JS
+- [D3.js v7](https://d3js.org) via CDN
+- GitHub Pages (served from `docs/`)
+- Genre data: `docs/data/genres.json` (80 genres, hand-curated)
+
+## Genre Data Schema
+
+```json
+{
+  "id": "blues",
+  "name": "Blues",
+  "parent_ids": [],
+  "origin_year": 1900,
+  "origin_decade": "1900s",
+  "region": "United States",
+  "description": "...",
+  "key_artists": ["Robert Johnson", "Muddy Waters"],
+  "key_tracks": ["Cross Road Blues"],
+  "spotify_track_id": "4gphxUgq0JSFv2BCLhNDiE",
+  "tags": ["root", "acoustic", "american"]
+}
+```
+
+## Development
+
+No build step needed. Open `docs/index.html` in a browser, or serve locally:
+
+```bash
+cd docs
+python3 -m http.server 8080
+```
+
+Then visit `http://localhost:8080`.
 
 ## CI
 
-The CI workflow validates genres.json on every push: schema, required fields, duplicate IDs, and dangling parent references.
+GitHub Actions validates `genres.json` on every push -- checks valid JSON, required fields, unique IDs, and valid parent references.
