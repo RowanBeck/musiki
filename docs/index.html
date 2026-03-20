@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Musiki - 300 Years of Music Evolution</title>
+  <title>Musiki — 525 Years of Music Evolution</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -272,16 +272,17 @@
       stroke-opacity: 0.75;
     }
 
-    /* GENRE PANEL */
+    /* GENRE PANEL — positioned absolutely so it overlays the canvas
+       without consuming flex space (fixing right-edge truncation) */
     #genre-panel {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
       width: 340px;
-      flex-shrink: 0;
       background: #161b22;
       border-left: 1px solid #30363d;
       overflow-y: auto;
       transform: translateX(340px);
       transition: transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
       z-index: 100;
     }
 
@@ -493,7 +494,7 @@
 <div id="app">
   <div id="header">
     <span class="logo">Musiki</span>
-    <span class="subtitle">500 years of music evolution</span>
+    <span class="subtitle">525 years of music evolution</span>
     <div id="search-wrapper">
       <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -551,7 +552,7 @@
     <span class="stats-sep">|</span>
     <span>10 genre families</span>
     <span class="stats-sep">|</span>
-    <span>1500 to 2025</span>
+    <span>1500 to 2018</span>
     <span id="zoom-info"></span>
     <span id="selected-info"></span>
   </div>
@@ -569,13 +570,13 @@
 <script>
 (function() {
   // ─── CONSTANTS ───────────────────────────────────────────────────────────────
-  const SVG_WIDTH  = 4200;
+  const SVG_WIDTH  = 4400;  // extra width so 2018+ era has breathing room
   const AXIS_HEIGHT = 64;
   const LANE_COUNT  = 10;
   const TIME_START  = 1490;
-  const TIME_END    = 2028;
-  const X_LEFT      = 20;
-  const X_RIGHT     = SVG_WIDTH - 30;
+  const TIME_END    = 2025;  // 2025 end gives visual buffer after 2018 (latest genre)
+  const X_LEFT      = 40;
+  const X_RIGHT     = SVG_WIDTH - 80;  // generous right margin
 
   const LANE_NAMES = [
     'Classical & European',
@@ -808,7 +809,7 @@
     const axisGroup = mainGroup.append('g').attr('id', 'axis-group');
 
     const decadeTicks = [];
-    for (let y = 1500; y <= 2030; y += 10) decadeTicks.push(y);
+    for (let y = 1500; y <= 2025; y += 10) decadeTicks.push(y);
 
     // Grid lines
     decadeTicks.forEach(yr => {
@@ -914,11 +915,23 @@
       .attr('stroke-width', d => d.parent_ids.length === 0 ? 1.5 : 1);
 
     // Labels: show only for root genres (no parents) by default
+    // Use abbreviated name if > 18 chars to reduce overlap
+    function shortName(name) {
+      if (name.length <= 16) return name;
+      // Try first two words, or truncate with ellipsis
+      const words = name.split(/[\s&\/]+/);
+      if (words.length >= 2 && words[0].length + words[1].length < 16) {
+        return words[0] + ' ' + words[1];
+      }
+      return name.slice(0, 14) + '…';
+    }
+
     nodeEls.append('text')
       .attr('class', 'node-label')
       .attr('y', d => (d.parent_ids.length === 0 ? 7 : 5) + 13)
       .attr('opacity', d => d.parent_ids.length === 0 ? 1 : 0)
-      .text(d => d.name);
+      .text(d => shortName(d.name))
+      .append('title').text(d => d.name);  // full name on native tooltip
 
     // ─── HOVER / SELECTION LOGIC ───────────────────────────────────────────────
     function showConnections(id) {
@@ -1111,12 +1124,16 @@
       bgGroup.attr('transform', t);
       updateLaneLabels(t);
 
-      // Show all labels when zoomed in closely
-      const showAllLabels = t.k > 1.2;
+      // Show all labels when zoomed in closely (higher threshold = less clutter)
+      const showAllLabels = t.k > 1.6;
+      const showMidLabels = t.k > 1.0;  // show labels for well-known genres at medium zoom
       nodeEls.select('text')
         .attr('opacity', function(d) {
           if (pinnedId || hoveredId) return null; // let showConnections manage
-          return (d.parent_ids.length === 0 || showAllLabels) ? 1 : 0;
+          if (d.parent_ids.length === 0) return 1;  // always show root genre labels
+          if (showAllLabels) return 0.85;
+          if (showMidLabels && (d.parent_ids.length <= 1)) return 0.7; // show shallow genres at medium zoom
+          return 0;
         });
 
       document.getElementById('zoom-info').textContent = Math.round(t.k * 100) + '%';
